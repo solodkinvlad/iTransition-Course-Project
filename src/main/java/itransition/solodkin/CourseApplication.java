@@ -1,5 +1,6 @@
 package itransition.solodkin;
 
+import itransition.solodkin.model.Profile;
 import itransition.solodkin.model.User;
 import itransition.solodkin.model.UserRole;
 import itransition.solodkin.repository.UserRepository;
@@ -20,7 +21,7 @@ public class CourseApplication {
 	@Bean
 	public CommandLineRunner bootstrap(UserRepository repository) {
 		return (args) -> {
-			repository.save(new User("Vlad", UserRole.ROLE_ADMIN, "1111", "solodkin@mail.ru"));
+			repository.save(new User("solodkin@mail.ru", "1111", UserRole.ROLE_ADMIN, new Profile("Vlad")));
 		};
 	}
 }
