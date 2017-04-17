@@ -1,21 +1,17 @@
 package itransition.solodkin.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 
 @Entity
 @Table(name = "users")
 @Getter
 @Setter
-@NoArgsConstructor
+@RequiredArgsConstructor
 @ToString
 public class User {
     @Id
@@ -33,21 +29,20 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
-    private String name;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ID")
+    private Profile profile;
 
-    private Date birthday;
-    private double weight;
-    private double height;
-    private Gender gender;
-
-    public User(String name) {
-        this.name = name;
+    public User(String email, String password, UserRole userRole) {
+        this.email = email;
+        this.password = password;
+        this.userRole = userRole;
     }
 
-    public User(String name, UserRole userRole, String password, String email) {
-        this.name = name;
-        this.userRole = userRole;
-        this.password = password;
+    public User(String email, String password, UserRole userRole, Profile profile) {
         this.email = email;
+        this.password = password;
+        this.userRole = userRole;
+        this.profile = profile;
     }
 }
