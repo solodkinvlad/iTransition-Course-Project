@@ -16,6 +16,11 @@
                 <div><label> Password: <input type="password" name="password"/> </label></div>
                 <div><input type="submit" value="Sign In"/></div>
             </form>
+
+            <form taction="/signin/facebook" method="post">
+                <input type="hidden" name="scope" value="public_profile" />
+                <input type="submit" value="Login using Facebook"/>
+            </form>
             <div><a th:href="@{users/registration}"><button>Sign Up</button></a></div>
         </div>
     </div>

@@ -6,3 +6,7 @@ spring:
     jpa:
       hibernate:
         ddl-auto: create
+    social:
+      facebook:
+        appId: YOUR_APP_ID
+        appSecret: YOUR_APP_SECRET
