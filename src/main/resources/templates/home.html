@@ -5,7 +5,9 @@
     <title>portfl</title>
 </head>
 <body>
-    <h1 align="center">Hello, world!</h1>
-    <a href="/login" ><button>Sign In</button></a>
+    <h1 th:inline="text" align="center">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
 </body>
 </html>
