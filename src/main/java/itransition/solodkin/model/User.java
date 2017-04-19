@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "users")
 @Getter
 @Setter
-@RequiredArgsConstructor
+@NoArgsConstructor
 @ToString
 public class User {
     @Id
@@ -32,12 +32,6 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID")
     private Profile profile;
-
-    public User(String email, String password, UserRole userRole) {
-        this.email = email;
-        this.password = password;
-        this.userRole = userRole;
-    }
 
     public User(String email, String password, UserRole userRole, Profile profile) {
         this.email = email;
