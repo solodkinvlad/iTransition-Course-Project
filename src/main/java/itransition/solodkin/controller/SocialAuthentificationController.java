@@ -3,6 +3,7 @@ package itransition.solodkin.controller;
 import itransition.solodkin.model.Provider;
 import itransition.solodkin.model.User;
 import itransition.solodkin.model.UserRole;
+import itransition.solodkin.service.ProviderService;
 import itransition.solodkin.service.UserService;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.social.facebook.api.Facebook;
@@ -20,36 +21,52 @@ public class SocialAuthentificationController {
     private Facebook facebook;
     private Twitter twitter;
     private UserService userService;
+    private ProviderService providerService;
 
-    public SocialAuthentificationController(Facebook facebook, UserService userService) {
+    public SocialAuthentificationController(Facebook facebook, Twitter twitter, UserService userService, ProviderService providerService) {
         this.facebook = facebook;
+        this.twitter = twitter;
         this.userService = userService;
+        this.providerService = providerService;
     }
 
     @GetMapping("/facebook")
     public String saveFacebookUser() {
-        User user = new User();
-
         org.springframework.social.facebook.api.User fb_user =
                 facebook.fetchObject("me", org.springframework.social.facebook.api.User.class, "id");
 
-        Long providedId = Long.parseLong(fb_user.getId());
-        user.setProvider(new Provider());
-        user.getProvider().setProvidedId(providedId);
-        user.getProvider().setProvider("facebook");
+        if (this.providerService.findByProvidedId(Long.parseLong(fb_user.getId())) == null) {
+            User user = new User();
+            Long providedId = Long.parseLong(fb_user.getId());
+            user.setProvider(new Provider());
+            user.getProvider().setProvidedId(providedId);
+            user.getProvider().setProvider("facebook");
 
-        user.setUserRole(UserRole.ROLE_USER);
-        user.setPassword(RandomStringUtils.random(8));
+            user.setUserRole(UserRole.ROLE_USER);
+            user.setPassword(RandomStringUtils.random(8));
 
-
+            this.userService.create(user);
+        }
 
         return "home";
     }
 
     @GetMapping("/twitter")
     public String saveTwitterUser() {
-        User user = new User();
+        Long providedId = twitter.userOperations().getUserProfile().getId();
 
-        twitter.userOperations().getUserProfile().getId();
+        if (this.providerService.findByProvidedId(providedId) == null) {
+            User user = new User();
+            user.setProvider(new Provider());
+            user.getProvider().setProvidedId(providedId);
+            user.getProvider().setProvider("twitter");
+
+            user.setUserRole(UserRole.ROLE_USER);
+            user.setPassword(RandomStringUtils.random(8));
+
+            this.userService.create(user);
+        }
+
+        return "home";
     }
 }
