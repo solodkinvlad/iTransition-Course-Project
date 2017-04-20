@@ -8,5 +8,5 @@ spring:
         ddl-auto: create
     social:
       facebook:
-        appId: YOUR_APP_ID
-        appSecret: YOUR_APP_SECRET
+        appId: 138696990002236
+        appSecret: f3d2a16a2a123ab9cb795681d0176039

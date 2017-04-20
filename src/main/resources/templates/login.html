@@ -19,6 +19,11 @@
             <div><a th:href="@{users/registration}"><button>Sign Up</button></a></div>
         </div>
     </div>
+    <h3>Connect to Facebook</h3>
+    <form action="/connect/facebook" method="POST">
+        <input type="hidden" name="scope" value="email"/>
+        <button type="submit">Connect to Facebook</button>
+    </form>
 </div>
 </body>
 </html>
