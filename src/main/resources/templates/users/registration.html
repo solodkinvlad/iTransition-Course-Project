@@ -3,15 +3,23 @@
 <head>
 
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../application_styles.css" type="text/css" />
     <meta charset="UTF-8"/>
     <title>Registration</title>
 </head>
 <body>
-
-<div class="container">
+<div class="wrapper">
+    <div class="header">
+        <img src="../images/logo.png"/>
+        <a href="/login" ><button>Sign In</button></a>
+    </div>
+    <div class="navbar"  align="center">
+    </div>
+</div>
+<div class="container" align="center">
     <div class="row">
         <div class="col-md-offset-5 col-md-3">
-            <form th:action="@{/users/registration}" th:object="${user}" method="post">
+            <form th:action="@{/registration}" th:object="${user}" method="post">
                 <input type="hidden" th:field="*{id}" />
                 <input type="hidden" th:field="*{userRole}" />
                 <table>
