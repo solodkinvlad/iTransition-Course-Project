@@ -7,6 +7,7 @@ import lombok.ToString;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -18,6 +19,7 @@ import java.util.Date;
 public class Profile {
 
     @Id
+    @Column(name = "PROFILE_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -27,7 +29,7 @@ public class Profile {
     @Temporal(TemporalType.DATE)
     private Date birthday;
 
-    //@NotNull
+    @NotNull
     private double weight;
 
     //@NotNull

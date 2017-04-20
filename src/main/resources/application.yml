@@ -10,3 +10,6 @@ spring:
       facebook:
         appId: 138696990002236
         appSecret: f3d2a16a2a123ab9cb795681d0176039
+      twitter:
+        app-id: zVb72mAgpI6dNY3ZtjKscZnfS
+        app-secret: U8AMhzd92rApYkvQ9ZDnzJiiSm7ZQ74hyw08BkRDk4yGfQCVQn
