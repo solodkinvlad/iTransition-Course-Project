@@ -19,7 +19,7 @@
 <div class="container" align="center">
     <div class="row">
         <div class="col-md-offset-5 col-md-3">
-            <form th:action="@{/registration}" th:object="${user}" method="post">
+            <form th:action="@{/users/registration}" th:object="${user}" method="post">
                 <input type="hidden" th:field="*{id}" />
                 <input type="hidden" th:field="*{userRole}" />
                 <table>
