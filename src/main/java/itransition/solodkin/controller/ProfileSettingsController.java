@@ -1,12 +1,10 @@
 package itransition.solodkin.controller;
 
-import itransition.solodkin.model.FilmingType;
 import itransition.solodkin.model.Gender;
 import itransition.solodkin.model.Profile;
 import itransition.solodkin.model.User;
 import itransition.solodkin.security.SecurityHelper;
 import itransition.solodkin.service.UserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Created by eabil on 21.04.2017.
