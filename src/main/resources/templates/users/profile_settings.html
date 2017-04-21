@@ -3,7 +3,7 @@
 <head>
 
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="../application_styles.css" type="text/css" />
+    <link rel="stylesheet" href="../application_styles.css" type="text/css"/>
     <meta charset="UTF-8"/>
     <title>Registration</title>
 </head>
@@ -11,9 +11,11 @@
 <div class="wrapper">
     <div class="header">
         <img src="../images/logo.png"/>
-        <a href="/login" ><button>Sign In</button></a>
+        <a href="/login">
+            <button>Sign In</button>
+        </a>
     </div>
-    <div class="navbar"  align="center">
+    <div class="navbar" align="center">
     </div>
 </div>
 <div class="container" align="center">
@@ -22,23 +24,32 @@
             <form th:action="@{/users/profile_settings}" th:object="${profile}" method="post">
                 <table>
                     <tr>
-                        <td><input placeholder="nickname" type="text" th:field="*{nickname}" /></td>
+                        <td><input placeholder="nickname" type="text" th:field="*{nickname}"/></td>
                         <td th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}">Nickname Error</td>
                     </tr>
                     <tr>
-                        <td><input placeholder="weight" type="number" th:field="*{weight}" /></td>
+                        <td><input placeholder="weight" type="number" th:field="*{weight}"/></td>
                         <td th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}">Weight Error</td>
                     </tr>
                     <tr>
-                        <td><input placeholder="height" type="number" th:field="*{height}" /></td>
+                        <td><input placeholder="height" type="number" th:field="*{height}"/></td>
                         <td th:if="${#fields.hasErrors('height')}" th:errors="*{height}">Height Error</td>
                     </tr>
                     <tr>
-                        <td><input placeholder="birthday" type="date" th:field="*{birthday}" /></td>
+                        <td><input placeholder="birthday" type="date" th:field="*{birthday}"/></td>
                         <td th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}">Birthday Error</td>
-                    </tr>S
+                    </tr>
                     <tr>
-                        <td><button type="submit">Save</button></td>
+                        <td><select th:field="*{gender}">
+                            <option th:each="gender : ${genders}" th:value="${gender}"
+                                    th:text="${gender.gender}"></option>
+                        </select></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <button type="submit">Save</button>
+                        </td>
                     </tr>
                 </table>
             </form>
