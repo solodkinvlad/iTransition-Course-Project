@@ -30,7 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/api/**").permitAll()
-                .and().formLogin().loginPage("/login").defaultSuccessUrl("/home").permitAll()
+                .and().formLogin().loginPage("/login").defaultSuccessUrl("/profile").permitAll()
                 .and().logout().permitAll()
                 .and().exceptionHandling().accessDeniedPage("/login");
     }
