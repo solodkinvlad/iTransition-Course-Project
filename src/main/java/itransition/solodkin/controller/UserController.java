@@ -1,5 +1,6 @@
 package itransition.solodkin.controller;
 
+import itransition.solodkin.model.Profile;
 import itransition.solodkin.model.User;
 import itransition.solodkin.model.UserRole;
 import itransition.solodkin.service.UserService;
@@ -27,6 +28,7 @@ public class UserController {
     private String newUser(Model model) {
         User user = new User();
         user.setUserRole(UserRole.ROLE_USER);
+        user.setProfile(new Profile());
         model.addAttribute("user", user);
         return "users/registration";
     }
@@ -37,6 +39,6 @@ public class UserController {
             return "users/registration";
         }
         this.userService.create(user);
-        return "redirect:/home";
+        return "redirect:/users/profile_settings";
     }
 }

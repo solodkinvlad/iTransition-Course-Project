@@ -19,9 +19,7 @@
 <div class="container" align="center">
     <div class="row">
         <div class="col-md-offset-5 col-md-3">
-            <form th:action="@{/users/registration}" th:object="${user}" method="post">
-                <input type="hidden" th:field="*{id}" />
-                <input type="hidden" th:field="*{userRole}" />
+            <form th:action="@{/users/profile_settings}" th:object="${profile}" method="post">
                 <table>
                     <tr>
                         <td><input placeholder="nickname" type="text" th:field="*{nickname}" /></td>
@@ -36,8 +34,8 @@
                         <td th:if="${#fields.hasErrors('height')}" th:errors="*{height}">Height Error</td>
                     </tr>
                     <tr>
-                        <td><input placeholder="date" type="date" th:field="*{date}" /></td>
-                        <td th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Date Error</td>
+                        <td><input placeholder="birthday" type="date" th:field="*{birthday}" /></td>
+                        <td th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}">Birthday Error</td>
                     </tr>S
                     <tr>
                         <td><button type="submit">Save</button></td>
