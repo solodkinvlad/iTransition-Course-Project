@@ -22,6 +22,7 @@
     <div class="row">
         <div class="col-md-offset-5 col-md-3">
             <form th:action="@{/users/profile_settings}" th:object="${profile}" method="post">
+                <input type="hidden" th:field="*{id}"/>
                 <table>
                     <tr>
                         <td><input placeholder="nickname" type="text" th:field="*{nickname}"/></td>
