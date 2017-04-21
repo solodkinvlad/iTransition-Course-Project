@@ -1,9 +1,6 @@
 package itransition.solodkin.controller;
 
-import itransition.solodkin.model.FilmingType;
-import itransition.solodkin.model.Gender;
-import itransition.solodkin.model.Profile;
-import itransition.solodkin.model.User;
+import itransition.solodkin.model.*;
 import itransition.solodkin.security.SecurityHelper;
 import itransition.solodkin.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +33,8 @@ public class ProfileSettingsController {
         Profile profile = this.userService.findOne(SecurityHelper.getUserId()).getProfile();
         model.addAttribute("profile", profile);
         model.addAttribute("genders", Arrays.asList(Gender.values()));
-        //model.addAttribute("filmingTypes", Arrays.asList(FilmingType.values()));
+        model.addAttribute("filmingTypes", Arrays.asList(FilmingType.values()));
+        model.addAttribute("numberOfModels", Arrays.asList(NumberOfModels.values()));
         return "/users/profile_settings";
     }
 

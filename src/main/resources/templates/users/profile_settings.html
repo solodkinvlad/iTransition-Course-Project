@@ -45,7 +45,14 @@
                                     th:text="${gender.gender}"></option>
                         </select></td>
                     </tr>
-
+                    <tr>
+                        <td th:each="filmingType : ${filmingTypes}"><input type="checkbox" th:field="*{filmingTypes}"
+                                   th:value="${filmingType}" th:text="${filmingType.type}"/></td>
+                    </tr>
+                    <tr>
+                        <td th:each="numberOfModule : ${numberOfModels}"><input type="checkbox" th:field="*{numberOfModels}"
+                                                                           th:value="${numberOfModule}" th:text="${numberOfModule.type}"/></td>
+                    </tr>
                     <tr>
                         <td>
                             <button type="submit">Save</button>
