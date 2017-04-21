@@ -24,7 +24,7 @@ public class Profile {
     private Long id;
 
     @NotEmpty
-    private String name;
+    private String nickname;
 
     @Temporal(TemporalType.DATE)
     private Date birthday;
@@ -32,14 +32,16 @@ public class Profile {
     @NotNull
     private double weight;
 
-    //@NotNull
+    @NotNull
     private double height;
 
-    //@NotNull
+    @NotNull
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    public Profile(String name) {
-        this.name = name;
+
+
+    public Profile(String nickname) {
+        this.nickname = nickname;
     }
 }

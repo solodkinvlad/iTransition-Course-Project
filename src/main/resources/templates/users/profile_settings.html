@@ -24,13 +24,21 @@
                 <input type="hidden" th:field="*{userRole}" />
                 <table>
                     <tr>
-                        <td><input placeholder="email" type="text" th:field="*{email}" /></td>
-                        <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</td>
+                        <td><input placeholder="nickname" type="text" th:field="*{nickname}" /></td>
+                        <td th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}">Nickname Error</td>
                     </tr>
                     <tr>
-                        <td><input placeholder="password" type="password" th:field="*{password}" /></td>
-                        <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>
+                        <td><input placeholder="weight" type="number" th:field="*{weight}" /></td>
+                        <td th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}">Weight Error</td>
                     </tr>
+                    <tr>
+                        <td><input placeholder="height" type="number" th:field="*{height}" /></td>
+                        <td th:if="${#fields.hasErrors('height')}" th:errors="*{height}">Height Error</td>
+                    </tr>
+                    <tr>
+                        <td><input placeholder="date" type="date" th:field="*{date}" /></td>
+                        <td th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Date Error</td>
+                    </tr>S
                     <tr>
                         <td><button type="submit">Save</button></td>
                     </tr>

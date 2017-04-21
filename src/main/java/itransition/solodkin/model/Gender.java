@@ -17,11 +17,11 @@ public enum Gender {
     DRAG_KING("Drag King"),
     DRAG_QUEEN("Drag Queen"),
     GENDER_BENDER("Gender Bender"),
-    GENDERQUEER("Gender Queer");
+    GENDER_QUEER("Gender Queer");
 
-    private String sex;
+    private String gender;
 
-    Gender(String sex) {
-        this.sex = sex;
+    Gender(String gender) {
+        this.gender = gender;
     }
 }
