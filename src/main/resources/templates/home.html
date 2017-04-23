@@ -2,21 +2,43 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-	<link rel="stylesheet" href="../application_styles.css" type="text/css" />
     <title>portfl</title>
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
+          rel="stylesheet"/>
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../css/normalize.min.css"/>
+    <link rel="stylesheet" href="../css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../css/animate.css"/>
+    <link rel="stylesheet" href="../css/templatemo_misc.css"/>
+    <link rel="stylesheet" href="../css/templatemo_style.css"/>
+    <link rel="stylesheet" href="../css/application_styles.css"/>
+
+    <script src="../js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
 <body>
-	<div class="wrapper">
-		<div class="header">
-			<img src="../images/logo.png"/>
-			<a href="/login" ><button>Sign In</button></a>
-		</div>
-		<div class="navbar"  align="center">
-		</div>
-	</div>
-    <h1 th:inline="text" align="center">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
-    </form>
+<div class="site-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-6">
+                <img src="../images/portfl-logo.png"/>
+            </div>
+            <div class="col-md-8 col-sm-6 col-xs-6">
+                <a href="#" class="toggle-menu"><i class="fa fa-bars"></i></a>
+                <div class="main-menu">
+                    <ul>
+                        <li><a href="#front">Home</a></li>
+                        <button href="/login" class="btn btn-success btn-signin">Sign In</button>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<h1 align="center" th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
 </body>
 </html>
