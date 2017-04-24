@@ -26,6 +26,7 @@ public class ProfileController {
                 || userId.equals(SecurityHelper.getUserId());
         model.addAttribute("ableToEdit", ableToEdit);
         model.addAttribute("profile" ,this.userService.findOne(userId).getProfile());
+        model.addAttribute("thisId", userId.toString());
         return "profile";
     }
 
