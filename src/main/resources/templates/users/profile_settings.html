@@ -1,68 +1,96 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
+          rel="stylesheet"/>
 
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="../application_styles.css" type="text/css"/>
+    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../css/normalize.min.css"/>
+    <link rel="stylesheet" href="../css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../css/animate.css"/>
+    <link rel="stylesheet" href="../css/templatemo_misc.css"/>
+    <link rel="stylesheet" href="../css/templatemo_style.css"/>
+    <link rel="stylesheet" href="../css/application_styles.css"/>
+
+    <script src="../js/vendor/modernizr-2.6.2.min.js"></script>
     <meta charset="UTF-8"/>
     <title>Registration</title>
 </head>
 <body>
-<div class="wrapper">
-    <div class="header">
-        <img src="../images/logo.png"/>
-        <a href="/login">
-            <button>Sign In</button>
-        </a>
-    </div>
-    <div class="navbar" align="center">
-    </div>
-</div>
-<div class="container" align="center">
-    <div class="row">
-        <div class="col-md-offset-5 col-md-3">
-            <form th:action="@{/users/profile_settings}" th:object="${profile}" method="post">
-                <input type="hidden" th:field="*{id}"/>
-                <table>
-                    <tr>
-                        <td><input placeholder="nickname" type="text" th:field="*{nickname}"/></td>
-                        <td th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}">Nickname Error</td>
-                    </tr>
-                    <tr>
-                        <td><input placeholder="weight" type="number" th:field="*{weight}"/></td>
-                        <td th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}">Weight Error</td>
-                    </tr>
-                    <tr>
-                        <td><input placeholder="height" type="number" th:field="*{height}"/></td>
-                        <td th:if="${#fields.hasErrors('height')}" th:errors="*{height}">Height Error</td>
-                    </tr>
-                    <tr>
-                        <td><input placeholder="birthday" type="date" th:field="*{birthday}"/></td>
-                        <td th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}">Birthday Error</td>
-                    </tr>
-                    <tr>
-                        <td><select th:field="*{gender}">
-                            <option th:each="gender : ${genders}" th:value="${gender}"
-                                    th:text="${gender.gender}"></option>
-                        </select></td>
-                    </tr>
-                    <tr>
-                        <td th:each="filmingType : ${filmingTypes}"><input type="checkbox" th:field="*{filmingTypes}"
-                                   th:value="${filmingType}" th:text="${filmingType.type}"/></td>
-                    </tr>
-                    <tr>
-                        <td th:each="numberOfModule : ${numberOfModels}"><input type="checkbox" th:field="*{numberOfModels}"
-                                                                           th:value="${numberOfModule}" th:text="${numberOfModule.type}"/></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button type="submit">Save</button>
-                        </td>
-                    </tr>
-                </table>
-            </form>
+<div class="site-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-6">
+                <img src="../images/portfl-logo.png"/>
+            </div>
+            <div class="col-md-8 col-sm-6 col-xs-6">
+                <a href="#" class="toggle-menu"><i class="fa fa-bars"></i></a>
+                <div class="main-menu">
+                    <ul>
+                        <li><a href="#front">Home</a></li>
+                        <a href="/login">
+                            <button class="btn btn-success btn-signin">Sign In</button>
+                        </a>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+<div class="container container-profile-settings">
+    <div class="row">
+        <form role="form" th:action="@{/users/profile_settings}" th:object="${profile}" method="post"
+              class="form-horizontal form-login">
+            <input type="hidden" th:field="*{id}"/>
+            <div class="form-group">
+                <label class="control-label" for="nickname">Nickname</label>
+                <input th:field="*{nickname}" id="nickname" type="text" class="form-control" placeholder="Nickname"/>
+                <td th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}">Nickname Error</td>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="weight">Weight</label>
+                <input th:field="*{weight}" id="weight" type="number" step="0.1" class="form-control"
+                       placeholder="Weight"/>
+                <td th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}">Weight Error</td>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="height">Height</label>
+                <input th:field="*{height}" id="height" type="number" step="0.1" class="form-control"
+                       placeholder="Height"/>
+                <td th:if="${#fields.hasErrors('height')}" th:errors="*{height}">Height Error</td>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="birthday">Birthday</label>
+                <input th:field="*{birthday}" id="birthday" type="date" class="form-control" placeholder="Birthday"/>
+                <td th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}">Birthday Error</td>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="gender">Gender</label>
+                <select id="gender" th:field="*{gender}" class="form-control">
+                    <option th:each="gender : ${genders}" th:value="${gender}"
+                            th:text="${gender.gender}"></option>
+                </select>
+            </div>
+            <h3>Which photos would you like to take part in?</h3>
+            <div class="form-group checkbox-group">
+                <label th:each="filmingType : ${filmingTypes}" class="checkbox-inline checkbox-success"
+                       style="display: block; text-align: left; margin-left: 10px;">
+                    <input style="width: auto;" type="checkbox" th:field="*{filmingTypes}" th:value="${filmingType}"
+                           th:text="${filmingType.type}"/>
+                </label>
+            </div>
+            <div class="form-group checkbox-group">
+                <label th:each="number : ${numberOfModels}" class="checkbox-inline checkbox-success"
+                       style="display: block; text-align: left; margin-left: 10px;">
+                    <input style="width: auto;" type="checkbox" th:field="*{numberOfModels}"
+                           th:value="${number}"
+                           th:text="${number.type}"/>
+                </label>
+            </div>
+            <button type="submit" class="btn btn-success btn-signin" style="margin: auto;">Save</button>
+        </form>
+    </div>
+</div>
+
 </body>
 </html>

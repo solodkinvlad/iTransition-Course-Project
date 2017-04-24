@@ -1,43 +1,58 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
+          rel="stylesheet"/>
 
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="../application_styles.css" type="text/css" />
+    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../css/normalize.min.css"/>
+    <link rel="stylesheet" href="../css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../css/animate.css"/>
+    <link rel="stylesheet" href="../css/templatemo_misc.css"/>
+    <link rel="stylesheet" href="../css/templatemo_style.css"/>
+    <link rel="stylesheet" href="../css/application_styles.css"/>
+
+    <script src="../js/vendor/modernizr-2.6.2.min.js"></script>
     <meta charset="UTF-8"/>
     <title>Registration</title>
 </head>
 <body>
-<div class="wrapper">
-    <div class="header">
-        <img src="../images/logo.png"/>
-        <a href="/login" ><button>Sign In</button></a>
-    </div>
-    <div class="navbar"  align="center">
-    </div>
-</div>
-<div class="container" align="center">
-    <div class="row">
-        <div class="col-md-offset-5 col-md-3">
-            <form th:action="@{/users/registration}" th:object="${user}" method="post">
-                <input type="hidden" th:field="*{id}" />
-                <input type="hidden" th:field="*{userRole}" />
-                <table>
-                    <tr>
-                        <td><input placeholder="email" type="text" th:field="*{email}" /></td>
-                        <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</td>
-                    </tr>
-                    <tr>
-                        <td><input placeholder="password" type="password" th:field="*{password}" /></td>
-                        <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>
-                    </tr>
-                    <tr>
-                        <td><button type="submit">Save</button></td>
-                    </tr>
-                </table>
-            </form>
+<div class="site-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-6">
+                <img src="../images/portfl-logo.png"/>
+            </div>
+            <div class="col-md-8 col-sm-6 col-xs-6">
+                <a href="#" class="toggle-menu"><i class="fa fa-bars"></i></a>
+                <div class="main-menu">
+                    <ul>
+                        <li><a href="#front">Home</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+<div class="container container-login">
+    <div class="row">
+        <form role="form" th:action="@{/users/registration}" th:object="${user}" method="post" class="form-login">
+            <input type="hidden" th:field="*{id}" />
+            <input type="hidden" th:field="*{userRole}" />
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input th:field="*{email}" id="email" type="email" class="form-control" placeholder="Enter Email"/>
+                <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</td>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input th:field="*{password}" id="password" type="password" class="form-control" placeholder="Enter password"/>
+                <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>
+            </div>
+            <button type="submit" class="btn btn-success btn-signin">Sign up</button>
+        </form>
+    </div>
+</div>
+
 </body>
 </html>

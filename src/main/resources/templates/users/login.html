@@ -1,41 +1,70 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
     <meta charset="UTF-8"/>
-    <link rel="stylesheet" href="../application_styles.css" type="text/css" />
     <title>Title</title>
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
+          rel="stylesheet"/>
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../css/normalize.min.css"/>
+    <link rel="stylesheet" href="../css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../css/animate.css"/>
+    <link rel="stylesheet" href="../css/templatemo_misc.css"/>
+    <link rel="stylesheet" href="../css/templatemo_style.css"/>
+    <link rel="stylesheet" href="../css/application_styles.css"/>
+
+    <script src="../js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
 <body>
-<div class="wrapper">
-    <div class="header">
-        <img src="../images/logo.png"/>
-        <a href="/login" ><button>Sign In</button></a>
+<div class="site-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-6">
+                <img src="../images/portfl-logo.png"/>
+            </div>
+            <div class="col-md-8 col-sm-6 col-xs-6">
+                <a href="#" class="toggle-menu"><i class="fa fa-bars"></i></a>
+                <div class="main-menu">
+                    <ul>
+                        <li><a href="#front">Home</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="navbar"  align="center">
+</div>
+<div class="container container-login">
+    <div class="row">
+        <form role="form" th:action="@{/login}" method="post" class="form-login">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input name="username" id="email" type="email" class="form-control" placeholder="Enter Email"/>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input name="password" id="password" type="password" class="form-control" placeholder="Enter password"/>
+            </div>
+            <button type="submit" class="btn btn-success btn-signin">Sign in</button>
+            <a href="/users/registration">  Create an account</a>
+        </form>
+        <h3 style="text-align: center;">Sign in with:</h3>
+        <div class="div-social">
+            <form action="/connect/facebook" method="POST" class="form-social">
+                <input type="hidden" name="scope" value="email"/>
+                <button type="submit" class="btn btn-primary btn-social">
+                    <span class="fa fa-facebook fa-3x" style="color: white;"></span>
+                </button>
+            </form>
+            <form action="/connect/twitter" method="POST" class="form-social">
+                <button type="submit" class="btn btn-info btn-social">
+                    <span class="fa fa-twitter fa-3x" style="color: white"></span>
+                </button>
+            </form>
+        </div>
     </div>
 </div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-offset-5 col-md-3">
-            <form th:action="@{/login}" method="post">
-                <div><label> User Name : <input type="text" name="username"/> </label></div>
-                <div><label> Password: <input type="password" name="password"/> </label></div>
-                <div><input type="submit" value="Sign In"/></div>
-            </form>
-            <div><a th:href="@{users/registration}"><button>Sign Up</button></a></div>
-        </div>
-    </div>
-    <h3>Connect to Facebook</h3>
-    <form action="/connect/facebook" method="POST">
-        <input type="hidden" name="scope" value="email"/>
-        <button type="submit">Connect to Facebook</button>
-    </form>
-    <form action="/connect/twitter" method="POST">
-        <button type="submit">Connect to Twitter</button>
-    </form>
-</div>
 </body>
 </html>

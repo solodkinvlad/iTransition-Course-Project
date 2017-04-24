@@ -1,4 +1,44 @@
 .btn-signin {
     background-color: #a0d914;
     margin-bottom: 7px;
+    margin-left: 80px;
+}
+
+.form-login {
+    width: 400px;
+    margin-left: 130px;
+}
+
+.form-social {
+    display: inline-block;
+    margin: auto;
+}
+
+.div-social {
+    text-align: center;
+}
+
+.btn-social {
+    width: 200px;
+    margin-bottom: 5px;
+}
+
+.container-login {
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 500px;
+    margin-top: 50px;
+}
+
+.container-profile-settings {
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 700px;
+    margin-top: 50px;
+}
+
+.checkbox-group {
+    border: 1px solid black;
+    border-radius: 10px;
+    text-align: center;
 }
