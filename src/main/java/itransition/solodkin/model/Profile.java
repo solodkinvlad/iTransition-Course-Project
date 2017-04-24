@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -50,7 +51,9 @@ public class Profile {
     @Enumerated(EnumType.STRING)
     private Set<NumberOfModels> numberOfModels;
 
-
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "PROFILE_ID")
+    private Set<CloudPhoto> cloudPhoto;
 
     public Profile(String nickname) {
         this.nickname = nickname;

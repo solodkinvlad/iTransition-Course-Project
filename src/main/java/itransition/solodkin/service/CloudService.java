@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -31,19 +32,14 @@ public class CloudService {
     @Autowired
     private Cloudinary cloudinary;
 
-    public String fileUpload(MultipartHttpServletRequest request) throws IOException {
-        Iterator<String> iterator = request.getFileNames();
-        String name=new String();
-        while(iterator.hasNext()){
-            name=iterator.next();
+    public String fileUpload(MultipartFile toUpload) {
+        Map uploadResult = Collections.emptyMap();
+        try {
+            uploadResult = cloudinary.uploader().upload(toUpload.getBytes(), ObjectUtils.emptyMap());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        MultipartFile multipartFile = request.getFile(name);
-        Map uploadResult;
-        Map params= ObjectUtils.asMap("914886547763236",env.getProperty("mremil6"));
-        File file = new File("mremil6");
-        FileUtils.writeByteArrayToFile(file, multipartFile.getBytes());
-        uploadResult=cloudinary.uploader().upload(file, params);
-        return String.valueOf(uploadResult.get("secure_url"));
+        return (String) uploadResult.get("url");
     }
 
     @Bean

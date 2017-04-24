@@ -1,5 +1,7 @@
 package itransition.solodkin.controller;
 
+import itransition.solodkin.model.Profile;
+import itransition.solodkin.model.User;
 import itransition.solodkin.model.UserRole;
 import itransition.solodkin.security.SecurityHelper;
 import itransition.solodkin.service.UserService;
@@ -22,11 +24,13 @@ public class ProfileController {
 
     @GetMapping("/id{userId}")
     public String getUserProfile(@PathVariable Long userId, Model model) {
+        Profile profile = this.userService.findOne(userId).getProfile();
         boolean ableToEdit = SecurityHelper.loggedUser().getAuthorities().contains(UserRole.ROLE_ADMIN)
                 || userId.equals(SecurityHelper.getUserId());
         model.addAttribute("ableToEdit", ableToEdit);
-        model.addAttribute("profile" ,this.userService.findOne(userId).getProfile());
+        model.addAttribute("profile", profile);
         model.addAttribute("thisId", userId.toString());
+        model.addAttribute("photos", profile.getCloudPhoto());
         return "profile";
     }
 
