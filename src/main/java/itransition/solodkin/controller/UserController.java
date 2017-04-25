@@ -3,8 +3,10 @@ package itransition.solodkin.controller;
 import itransition.solodkin.model.Profile;
 import itransition.solodkin.model.User;
 import itransition.solodkin.model.UserRole;
+import itransition.solodkin.security.SecurityService;
 import itransition.solodkin.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +23,8 @@ import javax.validation.Valid;
 @RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
+    @Autowired
+    private SecurityService securityService;
 
     private final UserService userService;
 
@@ -38,7 +42,12 @@ public class UserController {
         if (result.hasErrors()) {
             return "users/registration";
         }
-        this.userService.create(user);
-        return "redirect:/users/profile_settings";
+        if(this.userService.findByEmail(user.getEmail()) == null) {
+            this.userService.create(user);
+            this.securityService.autoLogin(user.getEmail(),user.getPassword());
+            return "redirect:/users/profile_settings";
+        } else {
+            return "users/registration";
+        }
     }
 }
