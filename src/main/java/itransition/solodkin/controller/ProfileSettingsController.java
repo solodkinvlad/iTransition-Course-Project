@@ -42,7 +42,7 @@ public class ProfileSettingsController {
         }
         User user = this.userService.findOne(userId);
         user.setProfile(profile);
-        this.userService.create(user);
+        this.userService.save(user);
         return "redirect:/id"+userId;
     }
 }

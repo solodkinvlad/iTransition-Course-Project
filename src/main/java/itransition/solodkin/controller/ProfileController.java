@@ -1,7 +1,6 @@
 package itransition.solodkin.controller;
 
 import itransition.solodkin.model.Profile;
-import itransition.solodkin.model.User;
 import itransition.solodkin.model.UserRole;
 import itransition.solodkin.security.SecurityHelper;
 import itransition.solodkin.service.UserService;

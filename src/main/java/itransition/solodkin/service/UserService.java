@@ -38,6 +38,9 @@ public class UserService {
         this.userRepository.save(user);
     }
 
-
+    @Transactional
+    public void save(User user) {
+        this.userRepository.save(user);
+    }
 
 }

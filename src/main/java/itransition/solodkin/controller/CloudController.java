@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -30,18 +32,23 @@ public class CloudController {
     }
 
     @PostMapping("/upload{thisId}")
-    public String upload(@RequestParam("photo") MultipartFile photo, @PathVariable Long thisId){
-        String url = cloudService.fileUpload(photo);
+    public String upload(@RequestParam("photo") List<MultipartFile> photosToUpload, @PathVariable Long thisId) {
+        List<String> urls = new ArrayList<>();
+        for (MultipartFile photo : photosToUpload) {
+            urls.add(cloudService.fileUpload(photo));
+        }
         User user = this.userService.findOne(thisId);
         Profile profile = user.getProfile();
         Set<CloudPhoto> photos = profile.getCloudPhoto();
-        CloudPhoto cloudPhoto = new CloudPhoto();
-        cloudPhoto.setUrl(url);
-        photos.add(cloudPhoto);
+        for (String url : urls) {
+            CloudPhoto cloudPhoto = new CloudPhoto();
+            cloudPhoto.setUrl(url);
+            photos.add(cloudPhoto);
+        }
         profile.setCloudPhoto(photos);
         user.setProfile(profile);
-        this.userService.create(user);
-        return "redirect:/";
+        this.userService.save(user);
+        return "redirect:/id" + thisId;
     }
 
 }
