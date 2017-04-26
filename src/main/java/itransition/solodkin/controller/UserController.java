@@ -3,8 +3,11 @@ package itransition.solodkin.controller;
 import itransition.solodkin.model.Profile;
 import itransition.solodkin.model.User;
 import itransition.solodkin.model.UserRole;
+import itransition.solodkin.security.SecurityService;
+import itransition.solodkin.security.SecurityServiceImpl;
 import itransition.solodkin.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +24,8 @@ import javax.validation.Valid;
 @RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
+    @Autowired
+    private SecurityService securityService;
 
     private final UserService userService;
 
@@ -28,17 +33,22 @@ public class UserController {
     private String newUser(Model model) {
         User user = new User();
         user.setUserRole(UserRole.ROLE_USER);
-        user.setProfile(new Profile());
         model.addAttribute("user", user);
         return "users/registration";
     }
 
     @PostMapping("/registration")
-    private String saveUser(@Valid User user, BindingResult result, Model model) {
+    private String saveUser(@Valid User user, BindingResult result) {
         if (result.hasErrors()) {
             return "users/registration";
         }
-        this.userService.create(user);
-        return "redirect:/users/profile_settings";
+        if(this.userService.findByEmail(user.getEmail()) == null) {
+            user.setProfile(new Profile());
+            this.userService.create(user);
+            this.securityService.autoLogin(user.getEmail(),user.getPassword());
+            return "redirect:/users/profile_settings" + SecurityServiceImpl.getUserId();
+        } else {
+            return "users/registration";
+        }
     }
 }

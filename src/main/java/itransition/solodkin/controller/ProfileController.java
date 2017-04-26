@@ -2,16 +2,13 @@ package itransition.solodkin.controller;
 
 import itransition.solodkin.model.Profile;
 import itransition.solodkin.model.UserRole;
-import itransition.solodkin.security.SecurityHelper;
+import itransition.solodkin.security.SecurityServiceImpl;
 import itransition.solodkin.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-/**
- * Created by Влад on 21.04.2017.
- */
 @Controller
 public class ProfileController {
 
@@ -24,8 +21,8 @@ public class ProfileController {
     @GetMapping("/id{userId}")
     public String getUserProfile(@PathVariable Long userId, Model model) {
         Profile profile = this.userService.findOne(userId).getProfile();
-        boolean ableToEdit = SecurityHelper.loggedUser().getAuthorities().contains(UserRole.ROLE_ADMIN)
-                || userId.equals(SecurityHelper.getUserId());
+        boolean ableToEdit = SecurityServiceImpl.loggedUser().getAuthorities().contains(UserRole.ROLE_ADMIN)
+                || userId.equals(SecurityServiceImpl.getUserId());
         model.addAttribute("ableToEdit", ableToEdit);
         model.addAttribute("profile", profile);
         model.addAttribute("thisId", userId);
@@ -35,6 +32,6 @@ public class ProfileController {
 
     @GetMapping("/profile")
     public String checkYourProfile() {
-        return "redirect:/id"+SecurityHelper.getUserId();
+        return "redirect:/id"+ SecurityServiceImpl.getUserId();
     }
 }
