@@ -3,32 +3,37 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Portfl</title>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
+          rel="stylesheet"/>
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../css/normalize.min.css"/>
+    <link rel="stylesheet" href="../css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../css/animate.css"/>
+    <link rel="stylesheet" href="../css/templatemo_misc.css"/>
+    <link rel="stylesheet" href="../css/templatemo_style.css"/>
+    <link rel="stylesheet" href="../css/application_styles.css"/>
 </head>
 <body>
-    <p th:text="${profile.nickname}"></p>
-    <p th:text="${profile.height}"></p>
-    <p th:text="${profile.weight}"></p>
-    <p th:text="${profile.birthday}"></p>
-    <img  th:each="photo : ${photos}" th:src="${photo.url}" />
-    <form method="POST" th:action="@{/photo/upload} + ${thisId}" enctype="multipart/form-data">
-        <p>File to upload:</p>
-        <div id="dropContainer" style="border:1px solid black;height:100px;">
-            Drop Here
+<p th:text="${profile.nickname}"></p>
+<p th:text="${profile.height}"></p>
+<p th:text="${profile.weight}"></p>
+<p th:text="${profile.birthday}"></p>
+<img th:each="photo : ${photos}" th:src="${photo.url}"/>
+<form method="POST" th:action="@{/photo/upload} + ${thisId}" enctype="multipart/form-data">
+    <div class="file-area">
+        <input type="file" name="photo" id="files" required="required" multiple="multiple"/>
+        <div class="file-dummy">
+            <span class="success">Great, your files are selected.</span>
+            <span class="default">Please select some files.</span>
         </div>
-        <input id="fileUpload" type="file" name="photo" multiple="multiple"/>
-        <input type="submit" value="upload" />
-    </form>
-    <div th:if="${ableToEdit}"><a th:href="'../users/profile_settings' + ${thisId}"><button>settings</button></a></div>
-    <script>
-        dropContainer.ondragover = dropContainer.ondragenter = function(evt) {
-            evt.preventDefault();
-        };
-
-        dropContainer.ondrop = function(evt) {
-            // pretty simple -- but not for IE :(
-            fileInput.files = evt.dataTransfer.files;
-            evt.preventDefault();
-        };
-    </script>
+    </div>
+    <input type="submit" value="upload"/>
+</form>
+<div th:if="${ableToEdit}">
+    <a th:href="'../users/profile_settings' + ${thisId}">
+        <button>settings</button>
+    </a>
+</div>
 </body>
 </html>

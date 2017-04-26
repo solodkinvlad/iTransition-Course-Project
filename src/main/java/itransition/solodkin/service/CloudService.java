@@ -2,21 +2,15 @@ package itransition.solodkin.service;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.Map;
-
 
 
 /**
@@ -43,7 +37,7 @@ public class CloudService {
     }
 
     @Bean
-    public Cloudinary createCloud(){
+    public Cloudinary createCloud() {
         return new Cloudinary(ObjectUtils.asMap(
                 "cloud_name", "mremil6",
                 "api_key", "914886547763236",
