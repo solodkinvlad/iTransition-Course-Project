@@ -39,7 +39,7 @@ public class CloudController {
         }
         User user = this.userService.findOne(thisId);
         Profile profile = user.getProfile();
-        Set<CloudPhoto> photos = profile.getCloudPhoto();
+        List<CloudPhoto> photos = profile.getCloudPhoto();
         for (String url : urls) {
             CloudPhoto cloudPhoto = new CloudPhoto();
             cloudPhoto.setUrl(url);

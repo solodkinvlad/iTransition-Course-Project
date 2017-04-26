@@ -28,7 +28,7 @@ public class ProfileController {
                 || userId.equals(SecurityHelper.getUserId());
         model.addAttribute("ableToEdit", ableToEdit);
         model.addAttribute("profile", profile);
-        model.addAttribute("thisId", userId.toString());
+        model.addAttribute("thisId", userId);
         model.addAttribute("photos", profile.getCloudPhoto());
         return "profile";
     }

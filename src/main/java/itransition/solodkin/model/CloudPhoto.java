@@ -7,6 +7,7 @@ import lombok.ToString;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by eabil on 24.04.2017.
@@ -24,5 +25,8 @@ public class CloudPhoto {
     private Long id;
 
     private String url;
+
+    @ElementCollection
+    private Set<Long> userSet;
 
 }

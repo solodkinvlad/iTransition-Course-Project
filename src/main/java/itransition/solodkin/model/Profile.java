@@ -9,6 +9,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -53,7 +55,7 @@ public class Profile {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "PROFILE_ID")
-    private Set<CloudPhoto> cloudPhoto;
+    private List<CloudPhoto> cloudPhoto;
 
     public Profile(String nickname) {
         this.nickname = nickname;
