@@ -2,37 +2,36 @@ package itransition.solodkin.controller;
 
 import itransition.solodkin.model.CloudPhoto;
 import itransition.solodkin.model.User;
-import itransition.solodkin.service.UserService;
+import itransition.solodkin.security.SecurityService;
+import itransition.solodkin.security.SecurityServiceImpl;
+import itransition.solodkin.service.CloudphotoService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by eabil on 26.04.2017.
  */
 
-@Controller
+@RestController
 public class LikeController {
-    private UserService userService;
+    private CloudphotoService cloudphotoService;
 
-    public LikeController(UserService userService) {
-        this.userService = userService;
+    public LikeController(CloudphotoService cloudphotoService) {
+        this.cloudphotoService = cloudphotoService;
     }
 
-    @PostMapping("/like{thisId}")
-    public String addLike(CloudPhoto photo, @PathVariable Long thisId) {
-        User user = this.userService.findOne(thisId);
-        List<CloudPhoto> cloudPhotos = user.getProfile().getCloudPhoto();
-        int index = cloudPhotos.indexOf(photo);
-        if (!cloudPhotos.get(index).getUserSet().contains(thisId)){
-            cloudPhotos.get(index).getUserSet().add(thisId);
-            this.userService.save(user);
+    @PostMapping("/like")
+    public @ResponseBody
+    CloudPhoto addLike(CloudPhoto photo) {
+        Long currentId = SecurityServiceImpl.getUserId();
+        if (!photo.getUserSet().contains(currentId)) {
+            photo.getUserSet().add(currentId);
+        } else {
+            photo.getUserSet().remove(currentId);
         }
-        return "redirect:/id" + thisId;
+        this.cloudphotoService.save(photo);
+        return photo;
     }
 }

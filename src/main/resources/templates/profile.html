@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../css/templatemo_misc.css"/>
     <link rel="stylesheet" href="../css/templatemo_style.css"/>
     <link rel="stylesheet" href="../css/application_styles.css"/>
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 </head>
 <body>
 <div class="site-header">
@@ -46,7 +47,10 @@
         <p th:text="${profile.birthday}"></p>
     </div>
 </div>
-<img th:each="photo : ${photos}" th:src="${photo.url}"/>
+<form th:each="photo : ${photos}" th:id="${photo.id}" class="form-photo">
+    <img th:src="${photo.url}"/>
+    <button type="submit" th:text="${photo.userSet.size()}"></button>
+</form>
 <form method="POST" th:action="@{/photo/upload} + ${thisId}" enctype="multipart/form-data">
     <div class="file-area">
         <input type="file" name="photo" id="files" required="required" multiple="multiple"/>
@@ -62,5 +66,6 @@
         <button>settings</button>
     </a>
 </div>
+<script src="../js/like.js"></script>
 </body>
 </html>
