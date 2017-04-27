@@ -26,6 +26,7 @@ public final class SecurityServiceImpl implements SecurityService{
     }
 
     public static CrmUserDetails loggedUser() {
+
         return (CrmUserDetails) getAuthenticationWithCheck().getPrincipal();
     }
 
@@ -35,7 +36,6 @@ public final class SecurityServiceImpl implements SecurityService{
         if (checkAuthenticationExists) {
             return authentication;
         }
-
         throw new BadCredentialsException("Authentication failed.");
     }
 

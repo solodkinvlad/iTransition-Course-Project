@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.Objects;
 
-/**
- * Created by Влад on 19.04.2017.
- */
 @ControllerAdvice
 @SessionAttributes("principal")
 public class UserControllerAdvice {
