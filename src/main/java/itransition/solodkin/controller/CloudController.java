@@ -1,8 +1,6 @@
 package itransition.solodkin.controller;
 
 import itransition.solodkin.service.CloudService;
-import itransition.solodkin.service.NudeDetector;
-import itransition.solodkin.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,14 +19,8 @@ import java.util.List;
 public class CloudController {
     private CloudService cloudService;
 
-    private UserService userService;
-
-    private NudeDetector nudeDetector;
-
-    public CloudController(CloudService cloudService, UserService userService, NudeDetector nudeDetector) {
+    public CloudController(CloudService cloudService) {
         this.cloudService = cloudService;
-        this.userService = userService;
-        this.nudeDetector = nudeDetector;
     }
 
     @PostMapping("/upload{thisId}")
@@ -41,7 +33,7 @@ public class CloudController {
 //            }
             urls.add(url);
         }
-        this.cloudService.savePhoto(urls, thisId);
+        this.cloudService.saveNewPhotos(urls, thisId);
         return "redirect:/id" + thisId;
     }
 

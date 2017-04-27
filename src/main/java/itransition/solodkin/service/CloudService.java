@@ -51,7 +51,7 @@ public class CloudService {
                 "api_secret", "7uRCqk5H0NJHoNQdsQ0oPhDsm1o"));
     }
 
-    public void savePhoto(List<String> urls, Long userId) {
+    public void saveNewPhotos(List<String> urls, Long userId) {
         User user = this.userService.findOne(userId);
         Profile profile = user.getProfile();
         List<CloudPhoto> photos = profile.getCloudPhoto();
