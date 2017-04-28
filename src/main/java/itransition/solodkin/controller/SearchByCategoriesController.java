@@ -1,14 +1,13 @@
 package itransition.solodkin.controller;
 
 import itransition.solodkin.model.*;
+import itransition.solodkin.service.ProfileService;
 import itransition.solodkin.service.UserService;
-import org.apache.commons.lang.ObjectUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,16 +17,16 @@ import java.util.List;
  */
 @Controller
 public class SearchByCategoriesController {
-    private UserService userService;
+    private ProfileService profileService;
 
-    public SearchByCategoriesController(UserService userService) {
-        this.userService = userService;
+    public SearchByCategoriesController(ProfileService profileService) {
+        this.profileService = profileService;
     }
 
     @GetMapping("/search_profile_by_categories")
     private String setSearch(Model model) {
-        Profile profile = new Profile();
-        model.addAttribute("profile", profile);
+        ProfileSearch profileSearch = new ProfileSearch();
+        model.addAttribute("profile", profileSearch);
         model.addAttribute("genders", Arrays.asList(Gender.values()));
         model.addAttribute("filmingTypes", Arrays.asList(FilmingType.values()));
         model.addAttribute("numberOfModels", Arrays.asList(NumberOfModels.values()));
@@ -35,17 +34,17 @@ public class SearchByCategoriesController {
     }
 
     @PostMapping("/search_by_categories")
-    private List<User> search(Profile profile, Model model) {
-        List<User> result = new ArrayList<>();
-        List<User> users = this.userService.findAll();
-        for (User user : users) {
-            if ((user.getProfile().getFilmingTypes().equals(profile.getFilmingTypes())) &&
-                    (user.getProfile().getGender().equals(profile.getGender())) &&
-                    (user.getProfile().getNumberOfModels().equals(profile.getNumberOfModels()))){
-                result.add(user);
+    private String search(ProfileSearch profile, Model model) {
+        List<Profile> result = new ArrayList<>();
+        List<Profile> profiles = this.profileService.findAll();
+        for (Profile prof : profiles) {
+            if ((prof.getFilmingTypes().containsAll(profile.getFilmingTypes())) &&
+                    (profile.getGenders().contains(prof.getGender())) &&
+                    (prof.getNumberOfModels().containsAll(profile.getNumberOfModels()))){
+                result.add(prof);
             }
-
         }
-        return result;
+        model.addAttribute("profiles", result);
+        return "/search_profile_by_categories";
     }
 }
