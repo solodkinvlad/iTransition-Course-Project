@@ -9,9 +9,11 @@ $(document).ready(function () {
         var $form = $(form_id);
         $.ajax({
             url: $form.attr('action'),
-            type: 'post',
+            type: 'GET',
             data: $form.serialize(),
-            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            contentType: 'application/json',
+            mimeType: 'application/json',
             success: function(response) {
                 $form.replaceWith(response);
             }

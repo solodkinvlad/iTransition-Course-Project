@@ -14,7 +14,7 @@ import java.util.List;
  * Created by eabil on 26.04.2017.
  */
 
-@RestController
+@Controller
 public class LikeController {
     private CloudphotoService cloudphotoService;
 
@@ -22,9 +22,9 @@ public class LikeController {
         this.cloudphotoService = cloudphotoService;
     }
 
-    @PostMapping("/like")
+    @RequestMapping(value = "/like", method = RequestMethod.GET)
     public @ResponseBody
-    CloudPhoto addLike(CloudPhoto photo) {
+    CloudPhoto addLike(@RequestParam CloudPhoto photo) {
         Long currentId = SecurityServiceImpl.getUserId();
         if (!photo.getUserSet().contains(currentId)) {
             photo.getUserSet().add(currentId);

@@ -50,7 +50,7 @@
         <p th:text="${profile.birthday}"></p>
     </div>
 </div>
-<form th:each="photo : ${photos}" th:id="${photo.id}" class="form-photo">
+<form th:action="@{/like}" th:each="photo : ${photos}" th:id="${photo.id}" class="form-photo">
     <img th:src="${photo.url}"/>
     <button type="submit" th:text="${photo.userSet.size()}"></button>
 </form>
