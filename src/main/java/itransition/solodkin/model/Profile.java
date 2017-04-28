@@ -28,6 +28,8 @@ public class Profile {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String avatar;
+
     //@NotEmpty
     private String nickname;
 

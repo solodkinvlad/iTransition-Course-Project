@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Search</title>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,4.."
+          rel="stylesheet"/>
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../css/normalize.min.css"/>
+    <link rel="stylesheet" href="../css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../css/animate.css"/>
+    <link rel="stylesheet" href="../css/templatemo_misc.css"/>
+    <link rel="stylesheet" href="../css/templatemo_style.css"/>
+</head>
+<body>
+<div class="site-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-6">
+                <img src="../images/portfl-logo.png"/>
+            </div>
+            <div class="col-md-8 col-sm-6 col-xs-6">
+                <a href="#" class="toggle-menu"><i class="fa fa-bars"></i></a>
+                <div class="main-menu">
+                    <ul>
+                        <li><a href="#front">Home</a></li>
+                        <a th:if="${principal} == 'anonymousUser'" href="/login">
+                            <button class="btn btn-success btn-signin">Sign In</button>
+                        </a>
+                        <a th:unless="${principal} == 'anonymousUser'" href="/logout">
+                            <button class="btn btn-success btn-signin">Sign out</button>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container container-profile-settings">
+    <div class="row">
+        <div class="search_menu">
+            <form role="form" th:action="@{/search_by_categories}" th:object="${profile}" method="post"
+                  class="form-horizontal form-login">
+                <div class="form-group">
+                    <label class="control-label" for="gender">Gender</label>
+                    <select id="gender" th:field="*{gender}" class="form-control">
+                        <option th:each="gender : ${genders}" th:value="${gender}"
+                                th:text="${gender.gender}"></option>
+                    </select>
+                </div>
+                <div class="form-group checkbox-group">
+                    <label th:each="filmingType : ${filmingTypes}" class="checkbox-inline checkbox-success"
+                           style="display: block; text-align: left; margin-left: 10px;">
+                        <input style="width: auto;" type="checkbox" th:field="*{filmingTypes}" th:value="${filmingType}"
+                               th:text="${filmingType.type}"/>
+                    </label>
+                </div>
+                <div class="form-group checkbox-group">
+                    <label th:each="number : ${numberOfModels}" class="checkbox-inline checkbox-success"
+                           style="display: block; text-align: left; margin-left: 10px;">
+                        <input style="width: auto;" type="checkbox" th:field="*{numberOfModels}"
+                               th:value="${number}"
+                               th:text="${number.type}"/>
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-success btn-signin" style="margin: auto;">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

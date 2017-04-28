@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="../css/templatemo_misc.css"/>
     <link rel="stylesheet" href="../css/templatemo_style.css"/>
     <link rel="stylesheet" href="../css/application_styles.css"/>
-    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
+
+    <script type="text/javascript" src="../js/like.js"></script>
 </head>
 <body>
 <div class="site-header">
@@ -41,6 +43,7 @@
 </div>
 <div class="container">
     <div class="row">
+        <img th:src="${profile.avatar}"/>
         <p th:text="${profile.nickname}"></p>
         <p th:text="${profile.height}"></p>
         <p th:text="${profile.weight}"></p>
@@ -66,6 +69,5 @@
         <button>settings</button>
     </a>
 </div>
-<script src="../js/like.js"></script>
 </body>
 </html>
