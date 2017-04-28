@@ -42,12 +42,12 @@
         <div class="search_menu">
             <form role="form" th:action="@{/search_by_categories}" th:object="${profile}" method="post"
                   class="form-horizontal form-login">
-                <div class="form-group">
-                    <label class="control-label" for="gender">Gender</label>
-                    <select id="gender" th:field="*{gender}" class="form-control">
-                        <option th:each="gender : ${genders}" th:value="${gender}"
-                                th:text="${gender.gender}"></option>
-                    </select>
+                <div class="form-group checkbox-group">
+                    <label th:each="gender : ${genders}" class="checkbox-inline checkbox-success"
+                           style="display: block; text-align: left; margin-left: 10px;">
+                        <input style="width: auto;" type="checkbox" th:field="*{genders}" th:value="${gender}"
+                               th:text="${gender.gender}"/>
+                    </label>
                 </div>
                 <div class="form-group checkbox-group">
                     <label th:each="filmingType : ${filmingTypes}" class="checkbox-inline checkbox-success"
@@ -68,6 +68,9 @@
             </form>
         </div>
     </div>
+</div>
+<div th:each="user : ${profiles}" th:id="${user.nickname}" class="form-photo">
+    <img th:src="${user.avatar}"/>
 </div>
 </body>
 </html>
