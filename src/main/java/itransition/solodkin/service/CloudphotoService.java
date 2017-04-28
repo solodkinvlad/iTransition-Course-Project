@@ -1,19 +1,11 @@
 package itransition.solodkin.service;
 
 import itransition.solodkin.model.CloudPhoto;
-import itransition.solodkin.model.User;
 import itransition.solodkin.repository.CloudphotoRepository;
-import itransition.solodkin.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-
-/**
- * Created by eabil on 26.04.2017.
- */
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +14,7 @@ public class CloudphotoService {
 
     private CloudphotoRepository cloudRepository;
 
+    @Autowired
     public CloudphotoService(CloudphotoRepository cloudRepository) {
         this.cloudRepository = cloudRepository;
     }

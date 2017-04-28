@@ -50,10 +50,10 @@
         <p th:text="${profile.birthday}"></p>
     </div>
 </div>
-<form th:action="@{/like}" th:each="photo : ${photos}" th:id="${photo.id}" class="form-photo">
+<div th:each="photo : ${photos}">
     <img th:src="${photo.url}"/>
-    <button type="submit" th:text="${photo.userSet.size()}"></button>
-</form>
+    <button onclick="like(this)" th:text="${photo.userSet.size()}" th:id="${photo.id}"></button>
+</div>
 <form method="POST" th:action="@{/photo/upload} + ${thisId}" enctype="multipart/form-data">
     <div class="file-area">
         <input type="file" name="photo" id="files" required="required" multiple="multiple"/>

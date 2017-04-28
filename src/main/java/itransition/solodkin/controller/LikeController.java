@@ -1,18 +1,14 @@
 package itransition.solodkin.controller;
 
 import itransition.solodkin.model.CloudPhoto;
-import itransition.solodkin.model.User;
-import itransition.solodkin.security.SecurityService;
 import itransition.solodkin.security.SecurityServiceImpl;
 import itransition.solodkin.service.CloudphotoService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.List;
-
-/**
- * Created by eabil on 26.04.2017.
- */
+import java.util.Set;
 
 @Controller
 public class LikeController {
@@ -22,16 +18,18 @@ public class LikeController {
         this.cloudphotoService = cloudphotoService;
     }
 
-    @RequestMapping(value = "/like", method = RequestMethod.GET)
-    public @ResponseBody
-    CloudPhoto addLike(@RequestParam CloudPhoto photo) {
+    @GetMapping(value = "/like")
+    public
+    @ResponseBody
+    String addLike(@RequestParam String photoId) {
+        CloudPhoto photo = this.cloudphotoService.findOne(Long.parseLong(photoId));
         Long currentId = SecurityServiceImpl.getUserId();
-        if (!photo.getUserSet().contains(currentId)) {
-            photo.getUserSet().add(currentId);
-        } else {
-            photo.getUserSet().remove(currentId);
+        Set<Long> likedUsers = photo.getUserSet();
+        if (!likedUsers.remove(currentId)) {
+            likedUsers.add(currentId);
         }
+        photo.setUserSet(likedUsers);
         this.cloudphotoService.save(photo);
-        return photo;
+        return String.valueOf(likedUsers.size());
     }
 }
