@@ -13,8 +13,8 @@
     <link rel="stylesheet" href="../css/templatemo_misc.css"/>
     <link rel="stylesheet" href="../css/templatemo_style.css"/>
     <link rel="stylesheet" href="../css/application_styles.css"/>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
 
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
     <script type="text/javascript" src="../js/like.js"></script>
 </head>
 <body>
@@ -41,13 +41,44 @@
         </div>
     </div>
 </div>
-<div class="container">
+<div class="container-profile-data">
     <div class="row">
-        <img th:src="${profile.avatar}"/>
-        <p th:text="${profile.nickname}"></p>
-        <p th:text="${profile.height}"></p>
-        <p th:text="${profile.weight}"></p>
-        <p th:text="${profile.birthday}"></p>
+        <div class="col-md-2"></div>
+        <div class="col-md-2 col-sm-6 col-xs-6 avatar">
+            <img th:src="${profile.avatar}" class="avatar"/>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="nickname">
+                <p th:text="${profile.nickname}"></p>
+            </div>
+            <div class="profile-data">
+                <div>
+                    <label>Nickname : </label>
+                    <p th:text="${profile.nickname}" class="profile-field"></p>
+                </div>
+                <div>
+                    <label>Gender : </label>
+                    <p th:text="${profile.gender.gender}" class="profile-field"></p>
+                </div>
+                <div>
+                    <label>Birthday : </label>
+                    <p th:text="${profile.birthday}" class="profile-field"></p>
+                </div>
+                <div>
+                    <label>Height : </label>
+                    <p th:text="${profile.height}" class="profile-field"></p>
+                </div>
+                <div>
+                    <label>Width : </label>
+                    <p th:text="${profile.weight}" class="profile-field"></p>
+                </div>
+            </div>
+            <div class="profile-data filmings">
+                <div th:each="filmingType : ${profile.filmingTypes}">
+                    <p th:text="${filmingType.type}"></p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <div th:each="photo : ${profile.cloudPhoto}">
