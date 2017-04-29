@@ -7,6 +7,7 @@ import lombok.ToString;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -29,4 +30,7 @@ public class CloudPhoto {
     @ElementCollection
     private Set<Long> userSet;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "PHOTO_ID")
+    private List<Comment> comments;
 }

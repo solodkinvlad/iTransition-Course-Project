@@ -16,6 +16,7 @@
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
     <script type="text/javascript" src="../js/like.js"></script>
+    <script type="text/javascript" src="../js/comment.js"></script>
 </head>
 <body>
 <div class="site-header">
@@ -84,6 +85,14 @@
 <div th:each="photo : ${profile.cloudPhoto}">
     <img th:src="${photo.url}"/>
     <button onclick="like(this)" th:text="${photo.userSet.size()}" th:id="${photo.id}"></button>
+    <div th:each="ph : ${photo.comments}" id="comments">
+        <p th:text="${ph.nickname}" ></p>
+        <p th:text="${ph.comment}"></p>
+    </div>
+    <form role="form">
+        <input type="text" id="textId" />
+        <button onclick="comment(this)" type="submit" th:id="${photo.id}" >Send</button>
+    </form>
 </div>
 <form method="POST" th:action="@{/photo/upload} + ${thisId}" enctype="multipart/form-data">
     <div class="file-area">
