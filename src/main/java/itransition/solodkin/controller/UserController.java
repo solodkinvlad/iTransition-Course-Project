@@ -4,7 +4,6 @@ import itransition.solodkin.model.Profile;
 import itransition.solodkin.model.User;
 import itransition.solodkin.model.UserRole;
 import itransition.solodkin.security.SecurityService;
-import itransition.solodkin.security.SecurityServiceImpl;
 import itransition.solodkin.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +23,15 @@ import javax.validation.Valid;
 @RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
-    @Autowired
     private SecurityService securityService;
 
-    private final UserService userService;
+    private UserService userService;
+
+    @Autowired
+    public UserController(SecurityService securityService, UserService userService) {
+        this.securityService = securityService;
+        this.userService = userService;
+    }
 
     @GetMapping("/registration")
     private String newUser(Model model) {
@@ -46,7 +50,7 @@ public class UserController {
             user.setProfile(new Profile());
             this.userService.create(user);
             this.securityService.autoLogin(user.getEmail(),user.getPassword());
-            return "redirect:/users/profile_settings" + SecurityServiceImpl.getUserId();
+            return "redirect:/users/profile_settings" + securityService.getUserId();
         } else {
             return "users/registration";
         }

@@ -1,8 +1,9 @@
 package itransition.solodkin.controller;
 
 import itransition.solodkin.model.CloudPhoto;
-import itransition.solodkin.security.SecurityServiceImpl;
+import itransition.solodkin.security.SecurityService;
 import itransition.solodkin.service.CloudphotoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,8 +15,12 @@ import java.util.Set;
 public class LikeController {
     private CloudphotoService cloudphotoService;
 
-    public LikeController(CloudphotoService cloudphotoService) {
+    private SecurityService securityService;
+
+    @Autowired
+    public LikeController(CloudphotoService cloudphotoService, SecurityService securityService) {
         this.cloudphotoService = cloudphotoService;
+        this.securityService = securityService;
     }
 
     @GetMapping(value = "/like")
@@ -23,7 +28,7 @@ public class LikeController {
     @ResponseBody
     String addLike(@RequestParam String photoId) {
         CloudPhoto photo = this.cloudphotoService.findOne(Long.parseLong(photoId));
-        Long currentId = SecurityServiceImpl.getUserId();
+        Long currentId = securityService.getUserId();
         Set<Long> likedUsers = photo.getUserSet();
         if (!likedUsers.remove(currentId)) {
             likedUsers.add(currentId);

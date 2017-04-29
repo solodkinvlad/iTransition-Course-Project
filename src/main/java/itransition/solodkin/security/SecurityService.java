@@ -7,5 +7,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface SecurityService {
+    Long getUserId();
+    CrmUserDetails loggedUser();
     void autoLogin(String username, String password);
 }

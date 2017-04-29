@@ -50,7 +50,7 @@
         <p th:text="${profile.birthday}"></p>
     </div>
 </div>
-<div th:each="photo : ${photos}">
+<div th:each="photo : ${profile.cloudPhoto}">
     <img th:src="${photo.url}"/>
     <button onclick="like(this)" th:text="${photo.userSet.size()}" th:id="${photo.id}"></button>
 </div>
