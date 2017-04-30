@@ -22,10 +22,10 @@
 <div class="site-header">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-sm-6 col-xs-6">
+            <div class="col-md-4">
                 <img src="../images/portfl-logo.png"/>
             </div>
-            <div class="col-md-8 col-sm-6 col-xs-6">
+            <div class="col-md-8">
                 <a href="#" class="toggle-menu"><i class="fa fa-bars"></i></a>
                 <div class="main-menu">
                     <ul>
@@ -45,54 +45,72 @@
 <div class="container-profile-data">
     <div class="row">
         <div class="col-md-2"></div>
-        <div class="col-md-2 col-sm-6 col-xs-6 avatar">
+        <div class="col-md-2 avatar">
             <img th:src="${profile.avatar}" class="avatar"/>
         </div>
-        <div class="col-md-6 col-sm-6 col-xs-6">
+        <div class="col-md-6">
             <div class="nickname">
                 <p th:text="${profile.nickname}"></p>
+                <div th:if="${ableToEdit}" style="display: inline-block; text-align: right;">
+                    <a th:href="'../users/profile_settings' + ${thisId}">
+                        <button class="btn btn-success edit">edit</button>
+                    </a>
+                </div>
             </div>
             <div class="profile-data">
-                <div>
-                    <label>Nickname : </label>
-                    <p th:text="${profile.nickname}" class="profile-field"></p>
-                </div>
-                <div>
+                <div class="profile-field">
                     <label>Gender : </label>
-                    <p th:text="${profile.gender.gender}" class="profile-field"></p>
+                    <p th:text="${profile.gender.gender}"></p>
                 </div>
-                <div>
+                <div class="profile-field">
                     <label>Birthday : </label>
-                    <p th:text="${profile.birthday}" class="profile-field"></p>
+                    <p th:text="${profile.birthday}"></p>
                 </div>
-                <div>
+                <div class="profile-field">
                     <label>Height : </label>
-                    <p th:text="${profile.height}" class="profile-field"></p>
+                    <p th:text="${profile.height}"></p>
                 </div>
-                <div>
-                    <label>Width : </label>
-                    <p th:text="${profile.weight}" class="profile-field"></p>
+                <div class="profile-field">
+                    <label>Weight : </label>
+                    <p th:text="${profile.weight}"></p>
+                </div>
+            </div>
+            <div class="profile-data filmings numberOfModels">
+                <label>Number of models in filming</label>
+                <div th:each="number : ${profile.numberOfModels}" class="profile-field">
+                    <p th:text="${number.type}"></p>
                 </div>
             </div>
             <div class="profile-data filmings">
-                <div th:each="filmingType : ${profile.filmingTypes}">
+                <label>Types of filming</label>
+                <div th:each="filmingType : ${profile.filmingTypes}" class="profile-field">
                     <p th:text="${filmingType.type}"></p>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div th:each="photo : ${profile.cloudPhoto}">
-    <img th:src="${photo.url}"/>
-    <button onclick="like(this)" th:text="${photo.userSet.size()}" th:id="${photo.id}"></button>
-    <div th:each="ph : ${photo.comments}" id="comments">
-        <p th:text="${ph.nickname}" ></p>
-        <p th:text="${ph.comment}"></p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8 photos">
+            <div th:each="photo : ${profile.cloudPhoto}" class="photo">
+                <div class="img-photo">
+                    <img th:src="${photo.url}" class="img-rounded"/>
+                </div>
+                <button onclick="like(this)" th:text="${photo.userSet.size()}" th:id="${photo.id}"></button>
+                <div th:each="ph : ${photo.comments}" id="comments">
+                    <p th:text="${ph.nickname}"></p>
+                    <p th:text="${ph.comment}"></p>
+                </div>
+                <form role="form">
+                    <input type="text" id="textId"/>
+                    <button onclick="comment(this)" type="submit" th:id="${photo.id}">Send</button>
+                </form>
+            </div>
+        </div>
     </div>
-    <form role="form">
-        <input type="text" id="textId" />
-        <button onclick="comment(this)" type="submit" th:id="${photo.id}" >Send</button>
-    </form>
 </div>
 <form method="POST" th:action="@{/photo/upload} + ${thisId}" enctype="multipart/form-data">
     <div class="file-area">
@@ -104,10 +122,5 @@
     </div>
     <input type="submit" value="upload"/>
 </form>
-<div th:if="${ableToEdit}">
-    <a th:href="'../users/profile_settings' + ${thisId}">
-        <button>settings</button>
-    </a>
-</div>
 </body>
 </html>
