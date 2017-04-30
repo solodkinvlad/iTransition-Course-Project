@@ -100,14 +100,16 @@
                     <img th:src="${photo.url}" class="img-rounded"/>
                 </div>
                 <button onclick="like(this)" th:text="${photo.userSet.size()}" th:id="${photo.id}"></button>
-                <div th:each="ph : ${photo.comments}" id="comments">
-                    <p th:text="${ph.nickname}"></p>
-                    <p th:text="${ph.comment}"></p>
+                <div id="comments">
+                    <div th:each="ph : ${photo.comments}">
+                        <p th:text="${ph.nickname}" ></p>
+                        <p th:text="${ph.comment}"></p>
+                    </div>
                 </div>
-                <form role="form">
-                    <input type="text" id="textId"/>
-                    <button onclick="comment(this)" type="submit" th:id="${photo.id}">Send</button>
-                </form>
+                <div>
+                    <input type="text" id="textId" />
+                    <button onclick="comment(this)" th:id="${photo.id}" >Send</button>
+                </div>
             </div>
         </div>
     </div>
@@ -122,5 +124,10 @@
     </div>
     <input type="submit" value="upload"/>
 </form>
+<div th:if="${ableToEdit}">
+    <a th:href="'../users/profile_settings' + ${thisId}">
+        <button>settings</button>
+    </a>
+</div>
 </body>
 </html>
