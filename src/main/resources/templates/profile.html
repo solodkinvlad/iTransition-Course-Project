@@ -17,6 +17,7 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
     <script type="text/javascript" src="../js/like.js"></script>
     <script type="text/javascript" src="../js/comment.js"></script>
+    <script type="text/javascript" src="../js/modal-upload.js"></script>
 </head>
 <body>
 <div class="site-header">
@@ -92,38 +93,45 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-4">
         </div>
-        <div class="col-md-8 photos">
+        <div class="col-md-6 photos">
+            <div>
+                <button id="upload-new-photos">Upload new photos</button>
+            </div>
             <div th:each="photo : ${profile.cloudPhoto}" class="photo">
                 <div class="img-photo">
                     <img th:src="${photo.url}" class="img-rounded"/>
                 </div>
-                <button class="glyphicon glyphicon-heart btn btn-success btn-like" onclick="like(this)" th:text="${photo.userSet.size()}" th:id="${photo.id}"></button>
+                <button class="glyphicon glyphicon-heart btn btn-success btn-like" onclick="like(this)"
+                        th:text="${photo.userSet.size()}" th:id="${photo.id}"></button>
                 <div id="comments">
                     <div th:each="ph : ${photo.comments}">
-                        <p th:text="${ph.nickname}" ></p>
+                        <p th:text="${ph.nickname}"></p>
                         <p th:text="${ph.comment}"></p>
                     </div>
                 </div>
                 <div>
-                    <input type="text" id="textId" />
-                    <button onclick="comment(this)" th:id="${photo.id}" >Send</button>
+                    <input type="text" id="textId"/>
+                    <button onclick="comment(this)" th:id="${photo.id}">Send</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<form method="POST" th:action="@{/photo/upload} + ${thisId}" enctype="multipart/form-data">
-    <div class="file-area">
-        <input type="file" name="photo" id="files" required="required" multiple="multiple"/>
-        <div class="file-dummy">
-            <span class="success">Great, your files are selected.</span>
-            <span class="default">Please select some files.</span>
+<div id="modal-upload">
+    <form method="POST" th:action="@{/photo/upload} + ${thisId}" enctype="multipart/form-data">
+        <div class="file-area">
+            <input type="file" name="photo" id="files" required="required" multiple="multiple"/>
+            <div class="file-dummy">
+                <span class="success">Great, your files are selected.</span>
+                <span class="default">Please select some files.</span>
+            </div>
         </div>
-    </div>
-    <input type="submit" value="upload"/>
-</form>
+        <input class="btn btn-success" type="submit" value="upload"/>
+    </form>
+</div>
+<div id="overlay"></div>
 <div th:if="${ableToEdit}">
     <a th:href="'../users/profile_settings' + ${thisId}">
         <button>settings</button>
