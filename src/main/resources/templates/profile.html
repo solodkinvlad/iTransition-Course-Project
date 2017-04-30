@@ -99,7 +99,7 @@
                 <div class="img-photo">
                     <img th:src="${photo.url}" class="img-rounded"/>
                 </div>
-                <button onclick="like(this)" th:text="${photo.userSet.size()}" th:id="${photo.id}"></button>
+                <button class="glyphicon glyphicon-heart btn btn-success btn-like" onclick="like(this)" th:text="${photo.userSet.size()}" th:id="${photo.id}"></button>
                 <div id="comments">
                     <div th:each="ph : ${photo.comments}">
                         <p th:text="${ph.nickname}" ></p>

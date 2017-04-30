@@ -183,20 +183,24 @@ div.photos {
 }
 
 div.photo {
-    border: 1px solid black;
     border-radius: 5px;
     display: inline-block;
-    width: 20%;
-    height: 200px;
+    width: 23%;
+    height: 260px;
     margin: 5px;
 }
 
 div.img-photo {
-    height: 90%;
-    line-height: 90%;
+    height: 230px;
+    line-height: 230px;
 }
 
 div.img-photo img {
     width: 100%;
     vertical-align: middle;
+}
+
+button.btn-like {
+    height: 20px;
+    padding: 1px 6px;
 }
