@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
+
 @Controller
 public class CommentController {
     private CloudphotoService cloudphotoService;
@@ -29,7 +31,7 @@ public class CommentController {
     @GetMapping(value = "/comment")
     public
     @ResponseBody
-    JSONArray addComment(@RequestParam String photoId, @RequestParam String text) {
+    ArrayList addComment(@RequestParam String photoId, @RequestParam String text) {
         CloudPhoto photo = this.cloudphotoService.findOne(Long.parseLong(photoId));
         Comment comment = new Comment();
         comment.setUserId(securityService.getUserId());
@@ -38,16 +40,13 @@ public class CommentController {
         photo.getComments().add(comment);
         this.cloudphotoService.save(photo);
 
-        JSONObject responseDetailsJson = new JSONObject();
-        JSONArray jsonArray = new JSONArray();
-        for(Comment com : photo.getComments()) {
-            JSONObject formDetailsJson = new JSONObject();
-            formDetailsJson.put("nickname", com.getNickname());
-            formDetailsJson.put("comment", com.getComment());
-            jsonArray.add(formDetailsJson);
+        ArrayList<String> array = new ArrayList<>();
+        for (Comment com : photo.getComments()) {
+            array.add(com.getNickname());
+            array.add(com.getComment());
         }
-        responseDetailsJson.put("forms", jsonArray);
 
-        return jsonArray;
+
+        return array;
     }
 }

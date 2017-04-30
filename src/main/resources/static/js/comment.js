@@ -5,17 +5,25 @@ function comment(element) {
     var text = $('#textId').val();
     var photoId = element.id;
     $.ajax({
-        dataType: 'json',
         url: '/comment',
         type: 'GET',
         data: {'photoId' : photoId, 'text' : text},
         success: function (response) {
-            $('#comments').innerHTML = "";
-            for (var i in response) {
-                var nickname = response[i].get("nickname");
-                var comment = response[i].get("comment");
-                $('#comments').append('<div align="center"> <p align="center" text="nickname"></p> <p align="center" text="comment"></p> </div>');
-            }
+            $(document).ready(function(){
+                document.getElementById('comments').innerHTML = '';
+                var i=0;
+                var str = '';
+                while (i < response.length - 1) {
+                    var nickname = response[i];
+                    var comment = response[i+1];
+                    str = str +  '<div> <p>'+nickname+'</p> <p>'+comment+'</p> </div>';
+                    i = i + 2;
+                }
+
+                document.getElementById('comments').innerHTML = str;
+                document.getElementById('textId').value='';
+            });
+
         }
     });
 

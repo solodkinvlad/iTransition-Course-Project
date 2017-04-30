@@ -85,14 +85,16 @@
 <div th:each="photo : ${profile.cloudPhoto}">
     <img th:src="${photo.url}"/>
     <button onclick="like(this)" th:text="${photo.userSet.size()}" th:id="${photo.id}"></button>
-    <div th:each="ph : ${photo.comments}" id="comments">
-        <p th:text="${ph.nickname}" ></p>
-        <p th:text="${ph.comment}"></p>
+    <div id="comments">
+        <div th:each="ph : ${photo.comments}">
+            <p th:text="${ph.nickname}" ></p>
+            <p th:text="${ph.comment}"></p>
+        </div>
     </div>
-    <form role="form">
+    <div>
         <input type="text" id="textId" />
-        <button onclick="comment(this)" type="submit" th:id="${photo.id}" >Send</button>
-    </form>
+        <button onclick="comment(this)" th:id="${photo.id}" >Send</button>
+    </div>
 </div>
 <form method="POST" th:action="@{/photo/upload} + ${thisId}" enctype="multipart/form-data">
     <div class="file-area">
