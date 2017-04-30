@@ -85,14 +85,14 @@
 <div th:each="photo : ${profile.cloudPhoto}">
     <img th:src="${photo.url}"/>
     <button onclick="like(this)" th:text="${photo.userSet.size()}" th:id="${photo.id}"></button>
-    <div id="comments">
+    <div th:id="${photo.id} + 'comments'">
         <div th:each="ph : ${photo.comments}">
             <p th:text="${ph.nickname}" ></p>
             <p th:text="${ph.comment}"></p>
         </div>
     </div>
     <div>
-        <input type="text" id="textId" />
+        <input type="text" th:id="${photo.id}+'textId'" />
         <button onclick="comment(this)" th:id="${photo.id}" >Send</button>
     </div>
 </div>
