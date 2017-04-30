@@ -5,8 +5,6 @@ import itransition.solodkin.model.Comment;
 import itransition.solodkin.security.SecurityService;
 import itransition.solodkin.service.CloudphotoService;
 import itransition.solodkin.service.UserService;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,13 +38,12 @@ public class CommentController {
         photo.getComments().add(comment);
         this.cloudphotoService.save(photo);
 
-        ArrayList<String> array = new ArrayList<>();
+        ArrayList<String> comments = new ArrayList<>();
         for (Comment com : photo.getComments()) {
-            array.add(com.getNickname());
-            array.add(com.getComment());
+            comments.add(com.getNickname());
+            comments.add(com.getComment());
         }
 
-
-        return array;
+        return comments;
     }
 }
