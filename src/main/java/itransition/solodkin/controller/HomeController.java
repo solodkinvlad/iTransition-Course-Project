@@ -38,11 +38,6 @@ public class HomeController {
         } else {
             model.addAttribute("photos", photos);
         }
-        if (this.securityService.loggedUser() != null) {
-            model.addAttribute("role", this.userService.findOne(this.securityService.getUserId()).getUserRole().getLabel());
-        } else {
-            model.addAttribute("role", "");
-        }
         return "home";
     }
 }

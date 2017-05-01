@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="../css/templatemo_style.css"/>
     <link rel="stylesheet" href="../css/application_styles.css"/>
 
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script type="text/javascript" src="../js/like.js"></script>
     <script src="../js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
 <body>
@@ -29,7 +31,7 @@
                 <div class="main-menu">
                     <ul>
                         <li><a href="/">Home</a></li>
-                        <li th:if="${currentId} != null"><a th:href="'/id' + ${currentId}">Profile</a></li>
+                        <li th:if="${currentId} != 'null'"><a th:href="'/id' + ${currentId}">Profile</a></li>
                         <li><a href="/settings">Settings</a></li>
                         <li th:if="${role} == 'Admin'"><a href="/userList">User list</a></li>
                         <a th:if="${principal} == 'anonymousUser'" href="/login">
