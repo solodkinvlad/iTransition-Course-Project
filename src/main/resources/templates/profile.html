@@ -148,13 +148,17 @@
         <div th:each="photo, photoStat : ${profile.cloudPhoto}" th:class="${photoStat.first}? 'item active' : 'item'">
             <img th:src="${photo.url}" style="display: block; margin: auto;"/>
             <div class="image-info">
-                <p th:id="${photo.id} + 'tags'"></p>
+                <div id="tags">
+                    <p style="display: inline" th:each="tag : ${photo.tags}" th:id="${photo.id} + 'tags'"
+                       th:text="${tag.tag}"></p>
+                </div>
                 <button class="glyphicon glyphicon-heart btn btn-success btn-like" onclick="like(this)"
                         th:text="${photo.userSet.size()}" th:id="${photo.id}"></button>
-                <button th:id="${photo.id}" class="btn btn-success btn-like" onclick="show_add_tag(this)">Add tag
+                <button th:if="${ableToEdit}" th:id="${photo.id}" class="btn btn-success btn-like"
+                        onclick="show_add_tag(this)">Add tag
                 </button>
                 <div class="add-tag" th:id="${photo.id} + 'div-add-tag'">
-                    <input type="text" th:id="${photo.id} + 'tag'" value="#"/>
+                    <input type="text" th:id="${photo.id} + 'inputTag'"/>
                     <button th:id="${photo.id}" class="glyphicon glyphicon-plus btn btn-success btn-like"
                             onclick="addTag(this)"></button>
                 </div>

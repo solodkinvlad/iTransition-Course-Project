@@ -33,7 +33,7 @@ public class CloudPhoto {
     @JoinColumn(name = "PHOTO_ID")
     private List<Comment> comments;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name="tags", joinColumns = {@JoinColumn (name="photo_id")}, inverseJoinColumns = {@JoinColumn (name="tag_id")})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name="photos_tags", joinColumns = {@JoinColumn (name="photo_id")}, inverseJoinColumns = {@JoinColumn (name="tag_id")})
     private List<Tag> tags;
 }
