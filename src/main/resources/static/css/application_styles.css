@@ -211,6 +211,7 @@ div.img-photo img {
 }
 
 button.btn-like {
+    display: inline-block;
     height: 20px;
     padding: 1px 6px;
 }
@@ -301,13 +302,25 @@ div#myCarousel {
     top: 10% !important;
 }
 
-div.item.active {
-    /*height: 320px;*/
-    /*line-height: 320px;*/
-}
-
 div#myCarousel img {
     max-height: 320px;
     max-width: 460px;
     vertical-align: middle;
+}
+
+div.add-tag {
+    display: none;
+    position: absolute;
+    height: 20px;
+    width: 240px;
+    border-radius: 10px;
+}
+
+div.add-tag input {
+    padding: 2px;
+    width: 200px;
+}
+
+div.image-info {
+    padding-left: 350px;
 }
