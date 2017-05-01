@@ -28,13 +28,14 @@ public class LikeController {
     @ResponseBody
     String addLike(@RequestParam String photoId) {
         CloudPhoto photo = this.cloudphotoService.findOne(Long.parseLong(photoId));
-        Long currentId = securityService.getUserId();
         Set<Long> likedUsers = photo.getUserSet();
-        if (!likedUsers.remove(currentId)) {
-            likedUsers.add(currentId);
+        if (securityService.getUserId() != null){
+            if (!likedUsers.remove(securityService.getUserId())) {
+                likedUsers.add(securityService.getUserId());
+            }
+            photo.setUserSet(likedUsers);
+            this.cloudphotoService.save(photo);
         }
-        photo.setUserSet(likedUsers);
-        this.cloudphotoService.save(photo);
         return String.valueOf(likedUsers.size());
     }
 }
