@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="../css/templatemo_style.css"/>
     <link rel="stylesheet" href="../css/application_styles.css"/>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
     <script type="text/javascript" src="../js/like.js"></script>
     <script type="text/javascript" src="../js/comment.js"></script>
@@ -32,7 +34,7 @@
                     <ul>
                         <li><a href="/">Home</a></li>
                         <li th:if="${currentId} != 0"><a th:href="'/id' + ${currentId}">Profile</a></li>
-                        <li ><a href="/settings">Settings</a></li>
+                        <li><a href="/settings">Settings</a></li>
                         <a th:if="${principal} == 'anonymousUser'" href="/login">
                             <button class="btn btn-success btn-signin">Sign In</button>
                         </a>
@@ -98,8 +100,9 @@
         <div class="col-md-2">
         </div>
         <div class="col-md-8 photos">
-            <div th:if="${ableToEdit}">
-                <button id="upload-new-photos">Upload new photos</button>
+            <div>
+                <button th:if="${ableToEdit}" id="upload-new-photos">Upload new photos</button>
+                <button id="carousel-show">Show as carousel</button>
             </div>
             <div th:each="photo : ${profile.cloudPhoto}" class="photo">
                 <div class="img-photo">
@@ -134,20 +137,11 @@
     </form>
 </div>
 <div id="overlay"></div>
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
+<div id="myCarousel" class="carousel slide" data-ride="carousel" style="display: none;">
+
     <div class="carousel-inner">
-        <div th:each="photo : ${profile.cloudPhoto}" class="item">
+        <div th:each="photo, photoStat : ${profile.cloudPhoto}" th:class="${photoStat.first}? 'item active' : 'item'" style="text-align: center;">
             <img th:src="${photo.url}"/>
-            <div th:id="${photo.id} + 'comments'">
-                <div th:each="ph : ${photo.comments}">
-                    <p th:text="${ph.nickname}"></p>
-                    <p th:text="${ph.comment}"></p>
-                </div>
-            </div>
-            <div>
-                <input type="text" th:id="${photo.id}+'textId'"/>
-                <button onclick="comment(this)" th:id="${photo.id}">Send</button>
-            </div>
         </div>
     </div>
     <a class="left carousel-control" href="#myCarousel" data-slide="prev">
