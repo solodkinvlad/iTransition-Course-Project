@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import java.util.Objects;
 
 @ControllerAdvice
-@SessionAttributes({"principal", "currentId", "role"})
+@SessionAttributes({"principal", "currentId"})
 public class UserControllerAdvice {
     private UserService userService;
     private SecurityService securityService;
