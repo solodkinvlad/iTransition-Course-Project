@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import java.util.Objects;
 
 @ControllerAdvice
-@SessionAttributes({"principal", "currentId"})
+@SessionAttributes({"principal", "currentId", "role"})
 public class UserControllerAdvice {
     private UserService userService;
     private SecurityService securityService;
@@ -40,5 +40,13 @@ public class UserControllerAdvice {
     @ModelAttribute("currentId")
     public String getCurrentId() {
         return String.valueOf(this.securityService.getUserId());
+    }
+
+    @ModelAttribute("role")
+    public String getRole() {
+        if (this.securityService.getUserId() == null) {
+            return null;
+        }
+        return this.userService.findOne(this.securityService.getUserId()).getUserRole().getLabel();
     }
 }

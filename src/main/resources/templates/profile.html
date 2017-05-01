@@ -37,6 +37,7 @@
                         <li><a href="/">Home</a></li>
                         <li th:if="${currentId} != null"><a th:href="'/id' + ${currentId}">Profile</a></li>
                         <li><a href="/settings">Settings</a></li>
+                        <li th:if="${role} == 'Admin'"><a href="/userList">User list</a></li>
                         <a th:if="${principal} == 'anonymousUser'" href="/login">
                             <button class="btn btn-success btn-signin">Sign In</button>
                         </a>

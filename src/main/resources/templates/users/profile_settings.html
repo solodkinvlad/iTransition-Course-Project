@@ -20,18 +20,19 @@
 <div class="site-header">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-sm-6 col-xs-6">
+            <div class="col-md-4">
                 <img src="../images/portfl-logo.png"/>
             </div>
-            <div class="col-md-8 col-sm-6 col-xs-6">
+            <div class="col-md-8">
                 <a href="#" class="toggle-menu"><i class="fa fa-bars"></i></a>
                 <div class="main-menu">
                     <ul>
                         <li><a href="/">Home</a></li>
-                        <li th:if="${currentId} != 0"><a th:href="'/id' + ${currentId}">Profile</a></li>
+                        <li th:if="${currentId} != 'null'"><a th:href="'/id' + ${currentId}">Profile</a></li>
                         <li><a href="/settings">Settings</a></li>
+                        <li th:if="${role} == 'Admin'"><a href="/userList">User list</a></li>
                         <a th:if="${principal} == 'anonymousUser'" href="/login">
-                            <button class="btn btn-success btn-signin">Sign In</button>
+                            <button class="btn btn-success btn-signin" th:text="#{sign_in}"></button>
                         </a>
                         <a th:unless="${principal} == 'anonymousUser'" href="/logout">
                             <button class="btn btn-success btn-signin">Sign out</button>
