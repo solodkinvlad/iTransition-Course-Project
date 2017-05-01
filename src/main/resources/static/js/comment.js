@@ -1,6 +1,3 @@
-/**
- * Created by eabil on 29.04.2017.
- */
 function comment(element) {
     var photoId = element.id;
     $.ajax({
