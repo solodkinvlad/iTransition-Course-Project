@@ -17,6 +17,7 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
     <script type="text/javascript" src="../js/like.js"></script>
     <script type="text/javascript" src="../js/comment.js"></script>
+    <script type="text/javascript" src="../js/modal-upload.js"></script>
 </head>
 <body>
 <div class="site-header">
@@ -29,7 +30,9 @@
                 <a href="#" class="toggle-menu"><i class="fa fa-bars"></i></a>
                 <div class="main-menu">
                     <ul>
-                        <li><a href="#front">Home</a></li>
+                        <li><a href="/">Home</a></li>
+                        <li th:if="${currentId} != 0"><a th:href="'/id' + ${currentId}">Profile</a></li>
+                        <li th:if="${currentId} != 0"><a href="/settings">Settings</a></li>
                         <a th:if="${principal} == 'anonymousUser'" href="/login">
                             <button class="btn btn-success btn-signin">Sign In</button>
                         </a>
@@ -92,10 +95,10 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-2">
         </div>
-        <div class="col-md-6 photos">
-            <div>
+        <div class="col-md-8 photos">
+            <div th:if="${ableToEdit}">
                 <button id="upload-new-photos">Upload new photos</button>
             </div>
             <div th:each="photo : ${profile.cloudPhoto}" class="photo">
@@ -104,13 +107,13 @@
                 </div>
                 <button class="glyphicon glyphicon-heart btn btn-success btn-like" onclick="like(this)"
                         th:text="${photo.userSet.size()}" th:id="${photo.id}"></button>
-                <div th:id="${photo.id} + 'comments'">
+                <div th:id="${photo.id} + 'comments'" style="display: none;">
                     <div th:each="ph : ${photo.comments}">
                         <p th:text="${ph.nickname}"></p>
                         <p th:text="${ph.comment}"></p>
                     </div>
                 </div>
-                <div>
+                <div style="display: none;">
                     <input type="text" th:id="${photo.id}+'textId'"/>
                     <button onclick="comment(this)" th:id="${photo.id}">Send</button>
                 </div>
@@ -131,10 +134,5 @@
     </form>
 </div>
 <div id="overlay"></div>
-<div th:if="${ableToEdit}">
-    <a th:href="'../users/profile_settings' + ${thisId}">
-        <button>settings</button>
-    </a>
-</div>
 </body>
 </html>

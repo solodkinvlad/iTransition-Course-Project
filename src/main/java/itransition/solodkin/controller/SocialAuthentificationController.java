@@ -46,11 +46,17 @@ public class SocialAuthentificationController {
         user.setPassword(providedId + "facebook");
         user.setUserRole(UserRole.ROLE_USER);
         user.setProfile(new Profile());
-        if (this.providerService.findByProvidedId(Long.parseLong(fb_user.getId())) == null) {
+        boolean newUser = this.providerService.findByProvidedId(providedId) == null;
+        if (newUser) {
             this.userService.create(user);
         }
 
         this.securityService.autoLogin(user.getEmail(), user.getPassword());
+
+        if (newUser) {
+            Long userId = this.userService.findByEmail(user.getEmail()).getId();
+            return "redirect:/users/profile_settings" + userId;
+        }
 
         return "redirect:/";
     }
@@ -68,12 +74,17 @@ public class SocialAuthentificationController {
         user.setProfile(new Profile());
         user.setUserRole(UserRole.ROLE_USER);
 
-        if (this.providerService.findByProvidedId(providedId) == null) {
+        boolean newUser = this.providerService.findByProvidedId(providedId) == null;
+        if (newUser) {
             this.userService.create(user);
         }
 
         this.securityService.autoLogin(user.getEmail(), user.getPassword());
 
+        if (newUser) {
+            Long userId = this.userService.findByEmail(user.getEmail()).getId();
+            return "redirect:/users/profile_settings" + userId;
+        }
         return "redirect:/";
     }
 }
