@@ -35,7 +35,7 @@
                 <div class="main-menu">
                     <ul>
                         <li><a href="/">Home</a></li>
-                        <li th:if="${currentId} != 0"><a th:href="'/id' + ${currentId}">Profile</a></li>
+                        <li th:if="${currentId} != null"><a th:href="'/id' + ${currentId}">Profile</a></li>
                         <li><a href="/settings">Settings</a></li>
                         <a th:if="${principal} == 'anonymousUser'" href="/login">
                             <button class="btn btn-success btn-signin">Sign In</button>
