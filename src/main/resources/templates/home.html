@@ -29,7 +29,7 @@
                 <div class="main-menu">
                     <ul>
                         <li><a href="/">Home</a></li>
-                        <li th:if="${currentId} != 0"><a th:href="'/id' + ${currentId}">Profile</a></li>
+                        <li th:if="${currentId} != null"><a th:href="'/id' + ${currentId}">Profile</a></li>
                         <li><a href="/settings">Settings</a></li>
                         <li th:if="${role} == 'Admin'"><a href="/userList">User list</a></li>
                         <a th:if="${principal} == 'anonymousUser'" href="/login">
@@ -46,13 +46,18 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-            <img th:each="photo : ${photos}" th:src="${photo.url}"/>
+        <div class="col-md-2"></div>
+        <div class="col-md-8 photos">
+            <div th:each="photo : ${photos}" class="photo">
+                <div class="img-photo">
+                    <img th:src="${photo.url}" class="img-rounded"/>
+                </div>
+                <button class="glyphicon glyphicon-heart btn btn-success btn-like" onclick="like(this)"
+                        th:text="${photo.userSet.size()}" th:id="${photo.id}"></button>
+            </div>
         </div>
     </div>
 </div>
-<h1 align="center" th:text="${principal}"></h1>
 <a th:href="'../search_profile_by_categories'">
     <button>Search_by_categories</button>
 </a>

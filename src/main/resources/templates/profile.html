@@ -35,7 +35,7 @@
                 <div class="main-menu">
                     <ul>
                         <li><a href="/">Home</a></li>
-                        <li th:if="${currentId} != 0"><a th:href="'/id' + ${currentId}">Profile</a></li>
+                        <li th:if="${currentId} != null"><a th:href="'/id' + ${currentId}">Profile</a></li>
                         <li><a href="/settings">Settings</a></li>
                         <a th:if="${principal} == 'anonymousUser'" href="/login">
                             <button class="btn btn-success btn-signin">Sign In</button>
@@ -154,7 +154,7 @@
                 <button th:id="${photo.id}" class="btn btn-success btn-like" onclick="show_add_tag(this)">Add tag
                 </button>
                 <div class="add-tag" th:id="${photo.id} + 'div-add-tag'">
-                    <input type="text" th:id="${photo.id} + 'tag'" value="#"/>
+                    <input type="text" th:id="${photo.id} + 'tag'"/>
                     <button th:id="${photo.id}" class="glyphicon glyphicon-plus btn btn-success btn-like"
                             onclick="addTag(this)"></button>
                 </div>
