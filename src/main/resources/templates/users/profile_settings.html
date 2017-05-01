@@ -27,9 +27,14 @@
                 <a href="#" class="toggle-menu"><i class="fa fa-bars"></i></a>
                 <div class="main-menu">
                     <ul>
-                        <li><a href="#front">Home</a></li>
-                        <a href="/login">
+                        <li><a href="/">Home</a></li>
+                        <li th:if="${currentId} != 0"><a th:href="'/id' + ${currentId}">Profile</a></li>
+                        <li th:if="${currentId} != 0"><a href="/settings">Settings</a></li>
+                        <a th:if="${principal} == 'anonymousUser'" href="/login">
                             <button class="btn btn-success btn-signin">Sign In</button>
+                        </a>
+                        <a th:unless="${principal} == 'anonymousUser'" href="/logout">
+                            <button class="btn btn-success btn-signin">Sign out</button>
                         </a>
                     </ul>
                 </div>

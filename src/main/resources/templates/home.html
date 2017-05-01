@@ -21,14 +21,16 @@
 <div class="site-header">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-sm-6 col-xs-6">
+            <div class="col-md-4">
                 <img src="../images/portfl-logo.png"/>
             </div>
-            <div class="col-md-8 col-sm-6 col-xs-6">
+            <div class="col-md-8">
                 <a href="#" class="toggle-menu"><i class="fa fa-bars"></i></a>
                 <div class="main-menu">
                     <ul>
-                        <li><a href="#front">Home</a></li>
+                        <li><a href="/">Home</a></li>
+                        <li th:if="${currentId} != 0"><a th:href="'/id' + ${currentId}">Profile</a></li>
+                        <li th:if="${currentId} != 0"><a href="/settings">Settings</a></li>
                         <a th:if="${principal} == 'anonymousUser'" href="/login">
                             <button class="btn btn-success btn-signin">Sign In</button>
                         </a>
@@ -38,6 +40,14 @@
                     </ul>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <img th:each="photo : ${photos}" th:src="${photo.url}"/>
         </div>
     </div>
 </div>
