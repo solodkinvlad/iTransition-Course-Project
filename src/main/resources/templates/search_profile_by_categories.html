@@ -69,7 +69,11 @@
         </div>
     </div>
 </div>
-<div th:each="user : ${profiles}" th:id="${user.nickname}" class="form-photo">
+<div>
+    <p th:text="${search_by}"></p>
+</div>
+<div th:each="user : ${profiles}" class="form-photo">
+    <a th:href="'/id' + ${user.id}"><button th:text="${user.nickname}"></button></a>
     <img th:src="${user.avatar}"/>
 </div>
 </body>
