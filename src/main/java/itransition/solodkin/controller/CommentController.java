@@ -33,7 +33,11 @@ public class CommentController {
         CloudPhoto photo = this.cloudphotoService.findOne(Long.parseLong(photoId));
         Comment comment = new Comment();
         comment.setUserId(securityService.getUserId());
-        comment.setNickname(this.userService.findOne(securityService.getUserId()).getProfile().getNickname());
+        if (securityService.getUserId() == null) {
+            comment.setNickname("anonymous");
+        } else {
+            comment.setNickname(this.userService.findOne(securityService.getUserId()).getProfile().getNickname());
+        }
         comment.setComment(text);
         photo.getComments().add(comment);
         this.cloudphotoService.save(photo);

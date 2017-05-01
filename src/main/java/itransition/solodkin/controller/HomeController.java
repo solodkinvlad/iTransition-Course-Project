@@ -2,7 +2,9 @@ package itransition.solodkin.controller;
 
 import itransition.solodkin.model.CloudPhoto;
 import itransition.solodkin.model.CloudPhotoComparator;
+import itransition.solodkin.security.SecurityService;
 import itransition.solodkin.service.CloudphotoService;
+import itransition.solodkin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +18,14 @@ import java.util.List;
 @Controller
 public class HomeController {
 
+    private SecurityService securityService;
+    private UserService userService;
     private CloudphotoService cloudphotoService;
 
     @Autowired
-    public HomeController(CloudphotoService cloudphotoService) {
+    public HomeController(SecurityService securityService, UserService userService, CloudphotoService cloudphotoService) {
+        this.securityService = securityService;
+        this.userService = userService;
         this.cloudphotoService = cloudphotoService;
     }
 
@@ -31,6 +37,11 @@ public class HomeController {
             model.addAttribute("photos", photos.subList(0, 10));
         } else {
             model.addAttribute("photos", photos);
+        }
+        if (this.securityService.loggedUser() != null) {
+            model.addAttribute("role", this.userService.findOne(this.securityService.getUserId()).getUserRole().getLabel());
+        } else {
+            model.addAttribute("role", "");
         }
         return "home";
     }

@@ -38,12 +38,11 @@ public class ProfileSettingsController {
     }
 
     @PostMapping("/profile_settings{userId}")
-    private String saveProfile(@RequestParam("photo") MultipartFile avatar, @Valid Profile profile, BindingResult result, Model model, @PathVariable Long userId) {
+    private String saveProfile(@Valid Profile profile, BindingResult result, Model model, @PathVariable Long userId) {
         if (result.hasErrors()) {
             return "users/profile_settings";
         }
         User user = this.userService.findOne(userId);
-        profile.setAvatar(this.cloudService.fileUpload(avatar));
         user.setProfile(profile);
         this.userService.save(user);
         return "redirect:/id"+userId;

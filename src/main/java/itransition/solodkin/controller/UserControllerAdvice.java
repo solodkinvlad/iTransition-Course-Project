@@ -1,6 +1,7 @@
 package itransition.solodkin.controller;
 
 import itransition.solodkin.security.SecurityService;
+import itransition.solodkin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,13 +13,14 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import java.util.Objects;
 
 @ControllerAdvice
-@SessionAttributes({"principal", "currentId"})
+@SessionAttributes({"principal", "currentId", "role"})
 public class UserControllerAdvice {
-
+    private UserService userService;
     private SecurityService securityService;
 
     @Autowired
-    public UserControllerAdvice(SecurityService securityService) {
+    public UserControllerAdvice(UserService userService, SecurityService securityService) {
+        this.userService = userService;
         this.securityService = securityService;
     }
 

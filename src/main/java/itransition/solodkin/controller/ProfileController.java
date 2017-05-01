@@ -6,6 +6,7 @@ import itransition.solodkin.security.CrmUserDetails;
 import itransition.solodkin.security.SecurityService;
 import itransition.solodkin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,8 +29,10 @@ public class ProfileController {
     public String getUserProfile(@PathVariable Long userId, Model model) {
         Profile profile = this.userService.findOne(userId).getProfile();
         CrmUserDetails loggedUser = securityService.loggedUser();
-        boolean ableToEdit = loggedUser != null && (securityService.loggedUser().getAuthorities().contains(UserRole.ROLE_ADMIN)
-                || userId.equals(securityService.getUserId()));
+
+        boolean ableToEdit = ((loggedUser != null)
+                && (securityService.loggedUser().getAuthorities().contains( new SimpleGrantedAuthority(UserRole.ROLE_ADMIN.name()))
+                || userId.equals(securityService.getUserId())));
         model.addAttribute("ableToEdit", ableToEdit);
         model.addAttribute("profile", profile);
         model.addAttribute("thisId", userId);

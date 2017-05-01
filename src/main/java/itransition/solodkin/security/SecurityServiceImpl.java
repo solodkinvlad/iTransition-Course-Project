@@ -26,7 +26,7 @@ public final class SecurityServiceImpl implements SecurityService {
     public Long getUserId() {
         CrmUserDetails user = loggedUser();
         if (user == null) {
-            return 0L;
+            return null;
         }
         return user.getId();
     }

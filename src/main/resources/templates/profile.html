@@ -18,6 +18,7 @@
     <script type="text/javascript" src="../js/like.js"></script>
     <script type="text/javascript" src="../js/comment.js"></script>
     <script type="text/javascript" src="../js/modal-upload.js"></script>
+    <script type="text/javascript" src="../js/modal-avatar-upload.js"></script>
 </head>
 <body>
 <div class="site-header">
@@ -57,6 +58,7 @@
                 <div th:if="${ableToEdit}" style="display: inline-block; text-align: right;">
                     <a th:href="'../users/profile_settings' + ${thisId}">
                         <button class="btn btn-success edit">edit</button>
+                        <button class="btn btn-success edit" id="upload-new-avatar">change avatar</button>
                     </a>
                 </div>
             </div>
@@ -92,6 +94,18 @@
             </div>
         </div>
     </div>
+</div>
+<div id="modal-avatar-upload">
+    <form method="POST" th:action="@{/avatar/upload} + ${thisId}" enctype="multipart/form-data">
+        <div class="file-area">
+            <input type="file" name="photo" id="files" required="required"/>
+            <div class="file-dummy">
+                <span class="success">Great, your files are selected.</span>
+                <span class="default">Please select some files.</span>
+            </div>
+        </div>
+        <input class="btn btn-success" type="submit" value="upload"/>
+    </form>
 </div>
 <div class="container">
     <div class="row">

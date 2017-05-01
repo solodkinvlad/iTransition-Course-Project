@@ -48,14 +48,7 @@
               class="form-horizontal form-login">
             <input type="hidden" th:field="${userId}"/>
             <input type="hidden" th:field="*{id}"/>
-            <div class="file-area">
-                <label class="control-label" for="avatar">Avatar</label>
-                <input type="file" name="photo" id="avatar" required="required"/>
-                <div class="file-dummy">
-                    <span class="success">Great, your files are selected.</span>
-                    <span class="default">Please select some files.</span>
-                </div>
-            </div>
+            <input type="hidden" th:field="*{avatar}"/>
             <div class="form-group">
                 <label class="control-label" for="nickname">Nickname</label>
                 <input th:field="*{nickname}" id="nickname" type="text" class="form-control" placeholder="Nickname"/>

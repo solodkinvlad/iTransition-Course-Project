@@ -2,7 +2,6 @@
  * Created by eabil on 29.04.2017.
  */
 function comment(element) {
-    var text = $('#textId').val();
     var photoId = element.id;
     $.ajax({
         url: '/comment',
