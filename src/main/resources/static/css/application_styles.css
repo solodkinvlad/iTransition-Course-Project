@@ -284,11 +284,13 @@ div#myCarousel {
     top: 10% !important;
 }
 
-div.item {
-    text-align: center;
+div.item.active {
+    /*height: 320px;*/
+    /*line-height: 320px;*/
 }
 
 div#myCarousel img {
     max-height: 320px;
     max-width: 460px;
+    vertical-align: middle;
 }

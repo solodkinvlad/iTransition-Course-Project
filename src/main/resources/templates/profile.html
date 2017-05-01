@@ -137,11 +137,23 @@
     </form>
 </div>
 <div id="overlay"></div>
-<div id="myCarousel" class="carousel slide" data-ride="carousel" style="display: none;">
+<div id="myCarousel" class="carousel slide" data-ride="carousel" style="display: none; height: 90%;">
 
     <div class="carousel-inner">
-        <div th:each="photo, photoStat : ${profile.cloudPhoto}" th:class="${photoStat.first}? 'item active' : 'item'" style="text-align: center;">
-            <img th:src="${photo.url}"/>
+        <div th:each="photo, photoStat : ${profile.cloudPhoto}" th:class="${photoStat.first}? 'item active' : 'item'">
+            <img th:src="${photo.url}" style="display: block; margin: auto;"/>
+            <button class="glyphicon glyphicon-heart btn btn-success btn-like" onclick="like(this)"
+                    th:text="${photo.userSet.size()}" th:id="${photo.id}"></button>
+            <div th:id="${photo.id} + 'comments'">
+                <div th:each="ph : ${photo.comments}">
+                    <p th:text="${ph.nickname}"></p>
+                    <p th:text="${ph.comment}"></p>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <input type="text" th:id="${photo.id}+'textId'"/>
+                <button onclick="comment(this)" th:id="${photo.id}">Send</button>
+            </div>
         </div>
     </div>
     <a class="left carousel-control" href="#myCarousel" data-slide="prev">
