@@ -223,6 +223,14 @@ button#upload-new-photos {
     font-size: 20px;
     color: white;
 }
+button#carousel-show {
+    background-color: #5bc0de;
+    border-radius: 10px;
+    border: 1px solid black;
+    width: 100%;
+    font-size: 20px;
+    color: white;
+}
 
 div#modal-upload {
     width: 300px;
@@ -283,4 +291,23 @@ div.connected {
     border: 2px solid black;
     border-radius: 10px;
     text-align: center;
+}
+
+div#myCarousel {
+    position: fixed;
+    width: 80%;
+    z-index: 5;
+    left: 10%;
+    top: 10% !important;
+}
+
+div.item.active {
+    /*height: 320px;*/
+    /*line-height: 320px;*/
+}
+
+div#myCarousel img {
+    max-height: 320px;
+    max-width: 460px;
+    vertical-align: middle;
 }
