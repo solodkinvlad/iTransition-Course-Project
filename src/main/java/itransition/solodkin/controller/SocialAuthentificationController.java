@@ -45,7 +45,7 @@ public class SocialAuthentificationController {
         user.setEmail(providedId + ".facebook@portfl.by");
         user.setPassword(providedId + "facebook");
         user.setUserRole(UserRole.ROLE_USER);
-        user.setProfile(new Profile());
+        user.setProfile(new Profile("anonymous"));
         boolean newUser = this.providerService.findByProvidedId(providedId) == null;
         if (newUser) {
             this.userService.create(user);
@@ -71,7 +71,7 @@ public class SocialAuthentificationController {
         user.getProvider().setProvider("twitter");
         user.setEmail(providedId + ".twitter@portfl.by");
         user.setPassword(providedId + "twitter");
-        user.setProfile(new Profile());
+        user.setProfile(new Profile("anonymous"));
         user.setUserRole(UserRole.ROLE_USER);
 
         boolean newUser = this.providerService.findByProvidedId(providedId) == null;

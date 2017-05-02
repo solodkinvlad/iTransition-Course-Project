@@ -49,13 +49,13 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-2" style="text-align: center;">
             <div class="cloud-tags">
                 <p class="tags" th:each="tag : ${tags}" th:id="${tag.id}" th:text="${tag.tag}"
                    onclick="find_by_tags(this)"></p>
             </div>
             <a th:href="'../search_profile_by_categories'">
-                <button class="btn btn-success">Search_by_categories</button>
+                <button class="btn btn-success">Search</button>
             </a>
         </div>
         <div class="col-md-8 photos">
