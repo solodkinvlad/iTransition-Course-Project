@@ -322,6 +322,7 @@ div.add-tag input {
 }
 
 div.image-info {
+    margin-top: 10px;
     margin-left: 25%;
     width: 50%;
     background: white;
@@ -362,4 +363,18 @@ p.comment-nickname {
 
 p.comment-text {
     margin: 0;
+}
+
+input.input-comment {
+    margin: 0;
+    margin-top: 5px;
+    padding: 4px;
+    display: inline-block;
+    width: 90%;
+    border-radius: 10px;
+}
+
+div.admin-panel {
+    border: 2px solid black;
+    border-radius: 10px;
 }

@@ -169,8 +169,8 @@
                     </div>
                 </div>
                 <div style="text-align: center;">
-                    <input type="text" th:id="${photo.id}+'textId'"/>
-                    <button onclick="comment(this)" th:id="${photo.id}">Send</button>
+                    <input class="input-comment" type="text" th:id="${photo.id}+'textId'"/>
+                    <button class="btn btn-success glyphicon glyphicon-comment" onclick="comment(this)" th:id="${photo.id}"></button>
                 </div>
             </div>
         </div>
