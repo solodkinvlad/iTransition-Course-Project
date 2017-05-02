@@ -65,7 +65,7 @@
                          class="img-rounded img-cursor"/>
                 </div>
                 <button class="glyphicon glyphicon-heart btn btn-success btn-like" onclick="like(this)"
-                        th:text="${photo.userSet.size()}" th:id="${photo.id}"></button>
+                        th:text="${photo.userSet.size()}" th:id="${photo.id}" th:name="${photo.id} + 'like'"></button>
             </div>
         </div>
     </div>
