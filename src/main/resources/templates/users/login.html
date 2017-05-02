@@ -27,7 +27,8 @@
             <div class="col-md-8 col-sm-6 col-xs-6">
                 <div class="main-menu">
                     <ul>
-                        <li><a href="/">Home</a></li>
+                        <li><a href="/" th:text="#{home}"></a></li>
+                        <li><a href="/settings" th:text="#{settings}"></a></li>
                     </ul>
                 </div>
             </div>
@@ -38,17 +39,17 @@
     <div class="row">
         <form role="form" th:action="@{/login}" method="post" class="form-login">
             <div class="form-group">
-                <label for="email">Email</label>
-                <input name="username" id="email" type="email" class="form-control" placeholder="Enter Email"/>
+                <label for="email" th:text="#{email}"></label>
+                <input name="username" id="email" type="email" class="form-control" th:placeholder="#{enter_email}"/>
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
-                <input name="password" id="password" type="password" class="form-control" placeholder="Enter password"/>
+                <label for="password" th:text="#{password}"></label>
+                <input name="password" id="password" type="password" class="form-control" th:placeholder="#{enter_password}"/>
             </div>
-            <button type="submit" class="btn btn-success btn-signin">Sign in</button>
-            <a href="/users/registration"> Create an account</a>
+            <button type="submit" class="btn btn-success btn-signin" th:text="#{sign_in}"></button>
+            <a href="/users/registration" th:text="#{create_an_account}"></a>
         </form>
-        <h3 style="text-align: center;">Sign in with:</h3>
+        <h3 style="text-align: center;" th:text="#{sign_in_with}"></h3>
         <div class="div-social">
             <form action="/connect/facebook" method="POST" class="form-social">
                 <input type="hidden" name="scope" value="email"/>
