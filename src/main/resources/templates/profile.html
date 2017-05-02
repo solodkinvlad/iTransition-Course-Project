@@ -125,7 +125,7 @@
                     <img th:src="${photo.url}" class="img-rounded"/>
                 </div>
                 <button class="glyphicon glyphicon-heart btn btn-success btn-like" onclick="like(this)"
-                        th:text="${photo.userSet.size()}" th:id="${photo.id}"></button>
+                        th:text="${photo.userSet.size()}" th:id="${photo.id}" name="like"></button>
             </div>
         </div>
     </div>
@@ -154,7 +154,7 @@
                        th:text="${tag.tag}"></p>
                 </div>
                 <button class="glyphicon glyphicon-heart btn btn-success btn-like" onclick="like(this)"
-                        th:text="${photo.userSet.size()}" th:id="${photo.id}"></button>
+                        th:text="${photo.userSet.size()}" th:id="${photo.id}" name="like"></button>
                 <button th:if="${ableToEdit}" th:id="${photo.id}" class="btn btn-success btn-like"
                         onclick="show_add_tag(this)">Add tag
                 </button>

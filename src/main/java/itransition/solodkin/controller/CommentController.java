@@ -32,7 +32,6 @@ public class CommentController {
     ArrayList addComment(@RequestParam String photoId, @RequestParam String text) {
         CloudPhoto photo = this.cloudphotoService.findOne(Long.parseLong(photoId));
         Comment comment = new Comment();
-        comment.setUserId(securityService.getUserId());
         if (securityService.getUserId() == null) {
             comment.setNickname("anonymous");
         } else {
@@ -44,8 +43,8 @@ public class CommentController {
 
         ArrayList<String> comments = new ArrayList<>();
         for (Comment com : photo.getComments()) {
-            comments.add(com.getNickname());
-            comments.add(com.getComment());
+            String temp = com.getNickname() + " " + com.getComment();
+            comments.add(temp);
         }
 
         return comments;
