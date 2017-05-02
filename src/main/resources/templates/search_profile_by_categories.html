@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../css/animate.css"/>
     <link rel="stylesheet" href="../css/templatemo_misc.css"/>
     <link rel="stylesheet" href="../css/templatemo_style.css"/>
+    <link rel="stylesheet" href="../css/application_styles.css"/>
 </head>
 <body>
 <div class="site-header">
@@ -39,17 +40,23 @@
         </div>
     </div>
 </div>
-<div>
-    <form role="form" th:action="@{/search_by_nickname}" method="post">
-        <input type="text" placeholder="nickname" name="nickname"/>
-        <button type="submit">Search</button>
-    </form>
-</div>
-<div class="container container-profile-settings">
+<div class="container">
     <div class="row">
-        <div class="search_menu">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 search">
+            <form role="form" th:action="@{/search_by_nickname}" method="post">
+                <input class="input-nickname" type="text" placeholder="nickname" name="nickname"/>
+                <button class="btn btn-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 search_menu">
             <form role="form" th:action="@{/search_by_categories}" th:object="${profile}" method="post"
-                  class="form-horizontal form-login">
+                  class="form-horizontal">
                 <div class="form-group checkbox-group">
                     <label th:each="gender : ${genders}" class="checkbox-inline checkbox-success"
                            style="display: block; text-align: left; margin-left: 10px;">
@@ -81,7 +88,9 @@
     <p th:text="${search_by}"></p>
 </div>
 <div th:each="user : ${profiles}" class="form-photo">
-    <a th:href="'/id' + ${user.id}"><button th:text="${user.nickname}"></button></a>
+    <a th:href="'/id' + ${user.id}">
+        <button th:text="${user.nickname}"></button>
+    </a>
     <img th:src="${user.avatar}"/>
 </div>
 </body>
