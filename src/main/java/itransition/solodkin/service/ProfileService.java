@@ -32,6 +32,10 @@ public class ProfileService {
         return this.profileRepository.findAll();
     }
 
+    public List<Profile> findByNickname (String nickname){
+        return this.profileRepository.findProfileByNicknameLike(nickname);
+    }
+
     @Transactional
     public void save(Profile profile) {
         this.profileRepository.save(profile);

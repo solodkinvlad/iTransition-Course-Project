@@ -27,13 +27,14 @@ public class SearchByNicknameController {
     @PostMapping("/search_by_nickname")
     public String searchByNickname (String nickname, Model model) {
         List<Profile> result = new ArrayList<>();
-        List<Profile> profiles = this.profileService.findAll();
-        for (Profile profile : profiles){
-            if (profile.getNickname().equals(nickname)){
-                result.add(profile);
-            }
-        }
-        model.addAttribute("profiles", result);
+//        List<Profile> profiles = this.profileService.findAll();
+//        for (Profile profile : profiles){
+//            if (profile.getNickname().equals(nickname)){
+//                result.add(profile);
+//            }
+//        }
+        List<Profile> profiles = this.profileService.findByNickname(nickname);
+        model.addAttribute("profiles", profiles);
         ProfileSearch profileSearch = new ProfileSearch();
         model.addAttribute("profile", profileSearch);
         model.addAttribute("genders", Arrays.asList(Gender.values()));

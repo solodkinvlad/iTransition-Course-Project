@@ -43,7 +43,7 @@ public class CommentController {
 
         ArrayList<String> comments = new ArrayList<>();
         for (Comment com : photo.getComments()) {
-            String temp = com.getNickname() + " " + com.getComment();
+            String temp = com.getNickname() + "|" + com.getComment();
             comments.add(temp);
         }
 

@@ -28,9 +28,9 @@ public class AvatarUpload {
     @PostMapping("/avatar/upload{thisId}")
     public String upload(@RequestParam("photo") MultipartFile photoToUpload, @PathVariable Long thisId) {
         String url = cloudService.fileUpload(photoToUpload);
-//            if(!nudeDetector.check(url)) {
-//                return "porn_content";
-//            }
+            if(!nudeDetector.check(url)) {
+                return "porn_content";
+            }
         Profile profile = this.profileService.findOne(thisId);
         profile.setAvatar(url);
         this.profileService.save(profile);
