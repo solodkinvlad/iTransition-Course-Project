@@ -5,20 +5,18 @@ function comment(element) {
         type: 'GET',
         data: {'photoId': photoId, 'text': document.getElementById(photoId + 'textId').value},
         success: function (response) {
-             $(document).ready(function () {
-             document.getElementById(photoId + 'comments').innerHTML = '';
-             var i = 0;
-             var str = '';
-             while (i < response.length - 1) {
-             var nickname = response[i];
-             var comment = response[i + 1];
-             str = str + '<div class="div-comment"> <p class="comment-nickname">' + nickname + '</p> <p class="comment-text">' + comment + '</p> </div>';
-             i = i + 2;
-             }
+            $(document).ready(function () {
+                alert(response);
+                var result = '';
+                for (var i = 0; i < response.length; i++) {
+                    alert(response[i]);
+                    var temp = response[i].split(' ');
+                    result = result + '<div> <p>' + temp[0] + '</p> <p>' + temp[1] + '</p> </div>';
+                }
 
-             document.getElementById(photoId + 'comments').innerHTML = str;
-             document.getElementById(photoId + 'textId').value = '';
-             });
+                document.getElementById(photoId + 'comments').innerHTML = result;
+                document.getElementById(photoId + 'textId').value = '';
+            });
 
         }
     });

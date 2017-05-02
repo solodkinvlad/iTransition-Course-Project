@@ -5,7 +5,7 @@ function like(element) {
         type: "GET",
         data: {'photoId' : photoId},
         success: function (response) {
-            $("#" + photoId).text(response);
+            $('[name = "like"]').text(response);
         }
     });
 }

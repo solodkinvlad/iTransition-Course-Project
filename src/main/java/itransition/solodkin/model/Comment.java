@@ -23,7 +23,5 @@ public class Comment {
 
     private String comment;
 
-    private Long userId;
-
     private String nickname;
 }
