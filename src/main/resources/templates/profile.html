@@ -142,13 +142,13 @@
     </form>
 </div>
 <div id="overlay"></div>
-<div id="myCarousel" class="carousel slide" style="display: none; height: 90%;">
+<div id="myCarousel" class="carousel slide" style="display: none;">
 
     <div class="carousel-inner">
         <div th:each="photo, photoStat : ${profile.cloudPhoto}" th:class="${photoStat.first}? 'item active' : 'item'">
             <img th:src="${photo.url}" style="display: block; margin: auto;"/>
             <div class="image-info">
-                <div th:id="'tagContext' + ${photo.id}">
+                <div class="div-tags" th:id="'tagContext' + ${photo.id}">
                     <p style="display: inline" th:each="tag : ${photo.tags}" th:id="${photo.id} + 'tags'"
                        th:text="${tag.tag}"></p>
                 </div>
@@ -162,10 +162,10 @@
                     <button th:id="${photo.id}" class="glyphicon glyphicon-plus btn btn-success btn-like"
                             onclick="addTag(this)"></button>
                 </div>
-                <div th:id="${photo.id} + 'comments'">
-                    <div th:each="ph : ${photo.comments}">
-                        <p th:text="${ph.nickname}"></p>
-                        <p th:text="${ph.comment}"></p>
+                <div class="div-comments" th:id="${photo.id} + 'comments'">
+                    <div class="div-comment" th:each="ph : ${photo.comments}">
+                        <p class="comment-nickname" th:text="${ph.nickname}"></p>
+                        <p class="comment-text" th:text="${ph.comment}"></p>
                     </div>
                 </div>
                 <div style="text-align: center;">

@@ -28,7 +28,7 @@ $(document).ready(function () {
                 }
             );
         $('#myCarousel')
-            .animate({opacity: 0, top: '45%'}, 200,
+            .animate({opacity: 0}, 200,
                 function(){ // пoсле aнимaции
                     $(this).css('display', 'none');
                     $('#overlay').fadeOut(400);

@@ -1,6 +1,7 @@
 function show_add_tag(element) {
     var photoId = element.id;
-    $('#' + photoId + 'div-add-tag').css("display" , "block");
+    $('#' + photoId + 'div-add-tag').css("display" , "inline-block");
+    $('#' + photoId + 'div-add-tag').css("position" , "static");
 }
 
 function addTag(element) {
@@ -12,6 +13,7 @@ function addTag(element) {
         success: function (response) {
             $(document).ready(function () {
                 $('#' + photoId + 'div-add-tag').css("display" , "none");
+                $('#' + photoId + 'div-add-tag').css("position" , "absolute");
                 document.getElementById('tagContext' + photoId.toString()).innerHTML = '<p style="display: inline">'+response+'</p>';
                 document.getElementById(photoId + 'inputTag').value = '';
             });

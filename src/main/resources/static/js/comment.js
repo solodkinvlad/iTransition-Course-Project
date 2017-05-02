@@ -12,7 +12,7 @@ function comment(element) {
              while (i < response.length - 1) {
              var nickname = response[i];
              var comment = response[i + 1];
-             str = str + '<div> <p>' + nickname + '</p> <p>' + comment + '</p> </div>';
+             str = str + '<div class="div-comment"> <p class="comment-nickname">' + nickname + '</p> <p class="comment-text">' + comment + '</p> </div>';
              i = i + 2;
              }
 
