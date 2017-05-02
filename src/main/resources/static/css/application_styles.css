@@ -325,7 +325,8 @@ div.image-info {
     padding-left: 350px;
 }
 
-p#tags {
-    display: inline-block;
+p.tags {
+    display: inline;
     color: #a0d914;
+    cursor: pointer;
 }

@@ -23,8 +23,7 @@ public class FindByTagsController {
 
     @GetMapping("/find-by-tags")
     public String findByTags(@RequestParam Long tagId, Model model) {
-
-        model.addAttribute("photos", this.tagRepository.findOne(tagId).getPhotos());
+        model.addAttribute("tag", this.tagRepository.findOne(tagId));
 
         return "photos_by_tags";
     }

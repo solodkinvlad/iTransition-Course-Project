@@ -50,7 +50,8 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8 photos">
-            <div th:each="photo : ${photos}" class="photo">
+            <p th:text="${tag.tag}"></p>
+            <div th:each="photo : ${tag.photos}" class="photo">
                 <div class="img-photo">
                     <img th:src="${photo.url}" class="img-rounded"/>
                 </div>
