@@ -18,7 +18,6 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 public class CloudPhoto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
