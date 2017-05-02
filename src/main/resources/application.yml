@@ -3,9 +3,6 @@ spring:
         url: jdbc:mysql://localhost:3306/portfl
         username: root
         password: root
-#    jpa:
-#      hibernate:
-#        ddl-auto: create
     social:
       facebook:
         appId: 138696990002236

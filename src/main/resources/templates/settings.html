@@ -25,15 +25,13 @@
                 <div class="main-menu">
                     <ul>
                         <li><a href="/" th:text="#{home}"></a></li>
-                        <li th:if="${currentId} != null">
-                            <a th:href="'/id' + ${currentId}" th:text="#{profile}"></a>
-                        </li>
+                        <li th:unless="${principal} == 'anonymousUser'"><a th:href="'/id' + ${currentId}" th:text="#{profile}"></a></li>
                         <li><a href="/settings" th:text="#{settings}"></a></li>
                         <li th:if="${role} == 'Admin'"><a href="/userList" th:text="#{user_list}"></a></li>
-                        <a th:if="${currentId} != null" href="/login">
+                        <a th:if="${principal} == 'anonymousUser'" href="/login">
                             <button class="btn btn-success btn-signin" th:text="#{sign_in}"></button>
                         </a>
-                        <a th:unless="${currentId} != null" href="/logout">
+                        <a th:unless="${principal} == 'anonymousUser'" href="/logout">
                             <button class="btn btn-success btn-signin" th:text="#{sign_out}"></button>
                         </a>
                     </ul>
