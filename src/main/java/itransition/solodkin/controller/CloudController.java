@@ -31,9 +31,9 @@ public class CloudController {
         List<String> urls = new ArrayList<>();
         for (MultipartFile photo : photosToUpload) {
             String url = cloudService.fileUpload(photo);
-//            if(!nudeDetector.check(url)) {
-//                return "porn_content";
-//            }
+            if(!nudeDetector.check(url)) {
+                return "porn_content";
+            }
             urls.add(url);
         }
         this.cloudService.saveNewPhotos(urls, thisId);
