@@ -225,7 +225,7 @@ button#upload-new-photos {
     color: white;
 }
 button#carousel-show {
-    background-color: #5bc0de;
+    background-color: #a0d914;
     border-radius: 10px;
     border: 1px solid black;
     width: 100%;
@@ -323,4 +323,9 @@ div.add-tag input {
 
 div.image-info {
     padding-left: 350px;
+}
+
+p#tags {
+    display: inline-block;
+    color: #a0d914;
 }
