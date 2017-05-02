@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="../css/templatemo_style.css"/>
     <link rel="stylesheet" href="../css/application_styles.css"/>
 
+    <script type="text/javascript" src="../js/find_profile_by_photo.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
     <script type="text/javascript" src="../js/like.js"></script>
     <script src="../js/vendor/modernizr-2.6.2.min.js"></script>
@@ -49,10 +50,11 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8 photos">
-            <p th:text="${tag.tag}"></p>
+            <p style="padding-left: 20px;" th:text="'Tag:' + ${tag.tag}"></p>
             <div th:each="photo : ${tag.photos}" class="photo">
                 <div class="img-photo">
-                    <img th:src="${photo.url}" class="img-rounded"/>
+                    <img onclick="imgToProfile(this)" th:id="${photo.id}" th:src="${photo.url}"
+                         class="img-rounded img-cursor"/>
                 </div>
                 <button class="glyphicon glyphicon-heart btn btn-success btn-like" onclick="like(this)"
                         th:text="${photo.userSet.size()}" th:id="${photo.id}"></button>

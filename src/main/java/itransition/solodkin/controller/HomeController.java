@@ -32,8 +32,8 @@ public class HomeController {
     private String getHomePage(Model model) {
         List<CloudPhoto> photos  = this.cloudphotoService.findAll();
         photos.sort(new CloudPhotoComparator());
-        if (photos.size() > 8) {
-            model.addAttribute("photos", photos.subList(0, 8));
+        if (photos.size() > 16) {
+            model.addAttribute("photos", photos.subList(0, 16));
         } else {
             model.addAttribute("photos", photos);
         }
