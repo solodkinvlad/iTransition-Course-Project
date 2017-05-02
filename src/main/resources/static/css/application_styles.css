@@ -324,3 +324,7 @@ div.add-tag input {
 div.image-info {
     padding-left: 350px;
 }
+
+img.img-cursor {
+    cursor: pointer;
+}

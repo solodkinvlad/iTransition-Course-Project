@@ -5,7 +5,6 @@ function imgToProfile(element) {
         type: "POST",
         data: {'photoId' : photoId},
         success: function (response) {
-            alert(response);
             window.location.href = '/id' + response;
         }
     });

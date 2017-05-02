@@ -53,7 +53,7 @@
         <div class="col-md-8 photos">
             <div th:each="photo : ${photos}" class="photo">
                 <div class="img-photo">
-                    <img onclick="imgToProfile(this)" th:id="${photo.id}" th:src="${photo.url}" class="img-rounded"/>
+                    <img onclick="imgToProfile(this)" th:id="${photo.id}" th:src="${photo.url}" class="img-rounded img-cursor"/>
                 </div>
                 <button class="glyphicon glyphicon-heart btn btn-success btn-like" onclick="like(this)"
                         th:text="${photo.userSet.size()}" th:id="${photo.id}"></button>

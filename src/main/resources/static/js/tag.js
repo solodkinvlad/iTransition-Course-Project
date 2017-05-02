@@ -12,7 +12,7 @@ function addTag(element) {
         success: function (response) {
             $(document).ready(function () {
                 $('#' + photoId + 'div-add-tag').css("display" , "none");
-                document.getElementById('tags').innerHTML = '<p style="display: inline">'+response+'</p>';
+                document.getElementById('tagContext' + photoId.toString()).innerHTML = '<p style="display: inline">'+response+'</p>';
                 document.getElementById(photoId + 'inputTag').value = '';
             });
 

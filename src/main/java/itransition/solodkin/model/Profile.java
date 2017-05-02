@@ -30,7 +30,7 @@ public class Profile {
 
     private String avatar;
 
-    //@NotEmpty
+    @NotEmpty
     private String nickname;
 
     @Temporal(TemporalType.DATE)

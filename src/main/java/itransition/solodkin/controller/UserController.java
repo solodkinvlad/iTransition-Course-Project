@@ -47,7 +47,7 @@ public class UserController {
             return "users/registration";
         }
         if(this.userService.findByEmail(user.getEmail()) == null) {
-            user.setProfile(new Profile());
+            user.setProfile(new Profile("anonymous"));
             this.userService.create(user);
             this.securityService.autoLogin(user.getEmail(),user.getPassword());
             return "redirect:/users/profile_settings" + securityService.getUserId();
