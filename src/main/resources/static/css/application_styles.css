@@ -375,6 +375,14 @@ input.input-comment {
 }
 
 div.admin-panel {
+    margin-top: 10px;
     border: 2px solid black;
     border-radius: 10px;
+}
+
+div.cloud-tags {
+    margin-top: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    text-align: center;
 }

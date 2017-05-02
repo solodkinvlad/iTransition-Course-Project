@@ -50,12 +50,19 @@
 <div class="container">
     <div class="row">
         <div class="col-md-2">
-            <p class="tags" th:each="tag : ${tags}" th:id="${tag.id}" th:text="${tag.tag}" onclick="find_by_tags(this)"></p>
+            <div class="cloud-tags">
+                <p class="tags" th:each="tag : ${tags}" th:id="${tag.id}" th:text="${tag.tag}"
+                   onclick="find_by_tags(this)"></p>
+            </div>
+            <a th:href="'../search_profile_by_categories'">
+                <button class="btn btn-success">Search_by_categories</button>
+            </a>
         </div>
         <div class="col-md-8 photos">
             <div th:each="photo : ${photos}" class="photo">
                 <div class="img-photo">
-                    <img onclick="imgToProfile(this)" th:id="${photo.id}" th:src="${photo.url}" class="img-rounded img-cursor"/>
+                    <img onclick="imgToProfile(this)" th:id="${photo.id}" th:src="${photo.url}"
+                         class="img-rounded img-cursor"/>
                 </div>
                 <button class="glyphicon glyphicon-heart btn btn-success btn-like" onclick="like(this)"
                         th:text="${photo.userSet.size()}" th:id="${photo.id}"></button>
@@ -63,8 +70,5 @@
         </div>
     </div>
 </div>
-<a th:href="'../search_profile_by_categories'">
-    <button>Search_by_categories</button>
-</a>
 </body>
 </html>
