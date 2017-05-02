@@ -149,7 +149,7 @@
         <div th:each="photo, photoStat : ${profile.cloudPhoto}" th:class="${photoStat.first}? 'item active' : 'item'">
             <img th:src="${photo.url}" style="display: block; margin: auto;"/>
             <div class="image-info">
-                <div id="tags">
+                <div th:id="'tagContext' + ${photo.id}">
                     <p style="display: inline" th:each="tag : ${photo.tags}" th:id="${photo.id} + 'tags'"
                        th:text="${tag.tag}"></p>
                 </div>

@@ -8,7 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = {"email"}))
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,6 +19,7 @@ public class User {
     private Long id;
 
     @Email
+    @NotEmpty
     private String email;
 
     @NotEmpty

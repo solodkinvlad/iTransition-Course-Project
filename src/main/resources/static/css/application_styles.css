@@ -325,6 +325,10 @@ div.image-info {
     padding-left: 350px;
 }
 
+img.img-cursor {
+    cursor: pointer;
+}
+
 p.tags {
     display: inline;
     color: #a0d914;
